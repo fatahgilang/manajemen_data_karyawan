@@ -14,12 +14,18 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\ViewAction;
+use Filament\Tables\Columns\ImageColumn; // tambah import
+use Illuminate\Support\Facades\Storage;
 
 class AttendanceResource extends Resource
 {
     protected static ?string $model = Attendance::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+protected static ?string $modelLabel = 'Absensi';
+protected static ?string $pluralModelLabel = 'Absensi';
+protected static ?string $navigationLabel = 'Absensi';
+protected static ?string $navigationGroup = 'Kepegawaian';
 
     public static function form(Form $form): Form
     {
@@ -52,18 +58,22 @@ class AttendanceResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('employee.id')
-                    ->label('Employee ID')
+                    ->label('ID Karyawan')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('date')
+                    ->label('Tanggal')
                     ->date()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('clock_in')
+                    ->label('Jam Masuk')
                     ->time()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('clock_out')
+                    ->label('Jam Pulang')
                     ->time()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('status')
+                    ->label('Status')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
                         'Hadir' => 'success',
@@ -72,6 +82,19 @@ class AttendanceResource extends Resource
                         'Alpha' => 'danger',
                         default => 'gray',
                     }),
+                // ===== Foto Absen =====
+                ImageColumn::make('check_in_photo_path')
+                    ->label('Foto Masuk')
+                    ->disk('public')
+                    ->size(48)
+                    ->circular()
+                    ->toggleable(),
+                ImageColumn::make('check_out_photo_path')
+                    ->label('Foto Keluar')
+                    ->disk('public')
+                    ->size(48)
+                    ->circular()
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

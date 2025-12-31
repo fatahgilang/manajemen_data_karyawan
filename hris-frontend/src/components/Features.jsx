@@ -13,38 +13,38 @@ const Features = () => {
   const features = [
     {
       icon: UserGroupIcon,
-      title: 'Employee Management',
-      description: 'Comprehensive employee lifecycle management from onboarding to offboarding with centralized data storage and management.',
+      title: 'Manajemen Karyawan',
+      description: 'Manajemen siklus karyawan dari onboarding hingga offboarding dengan penyimpanan dan pengelolaan data terpusat.',
       color: 'bg-blue-100 text-blue-600'
     },
     {
       icon: CurrencyDollarIcon,
-      title: 'Payroll Processing',
-      description: 'Automated payroll calculations, tax deductions, and multi-currency support for global enterprises.',
+      title: 'Proses Penggajian',
+      description: 'Perhitungan gaji otomatis, potongan pajak, dan dukungan multi-mata uang untuk perusahaan global.',
       color: 'bg-green-100 text-green-600'
     },
     {
       icon: ClockIcon,
-      title: 'Attendance Tracking',
-      description: 'Real-time attendance monitoring with GPS location tracking, biometric integration, and leave management.',
+      title: 'Pelacakan Absensi',
+      description: 'Pemantauan absensi real-time dengan pelacakan lokasi GPS, integrasi biometrik, dan manajemen cuti.',
       color: 'bg-purple-100 text-purple-600'
     },
     {
       icon: DocumentTextIcon,
-      title: 'Performance Management',
-      description: 'Goal setting, performance reviews, and 360-degree feedback with automated reporting and analytics.',
+      title: 'Manajemen Kinerja',
+      description: 'Penetapan tujuan, penilaian kinerja, dan umpan balik 360 derajat dengan laporan dan analitik otomatis.',
       color: 'bg-orange-100 text-orange-600'
     },
     {
       icon: ShieldCheckIcon,
-      title: 'Compliance Management',
-      description: 'Stay compliant with local labor laws, regulations, and industry standards with automated compliance checks.',
+      title: 'Manajemen Kepatuhan',
+      description: 'Tetap patuh pada hukum ketenagakerjaan lokal dan standar industri dengan pemeriksaan kepatuhan otomatis.',
       color: 'bg-red-100 text-red-600'
     },
     {
       icon: ChartBarIcon,
-      title: 'Analytics & Reporting',
-      description: 'Advanced analytics dashboard with customizable reports, KPIs, and predictive insights for strategic decision-making.',
+      title: 'Analitik & Pelaporan',
+      description: 'Dasbor analitik canggih dengan laporan yang dapat disesuaikan, KPI, dan wawasan prediktif untuk pengambilan keputusan strategis.',
       color: 'bg-indigo-100 text-indigo-600'
     }
   ];
@@ -61,11 +61,11 @@ const Features = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            Comprehensive <span className="text-blue-900">HR Solutions</span>
+            Solusi <span className="text-blue-900">HR Komprehensif</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Our enterprise HRIS platform provides end-to-end human resources management 
-            with powerful features designed for modern organizations.
+            Platform HRIS perusahaan kami menyediakan manajemen sumber daya manusia end-to-end 
+            dengan fitur kuat yang dirancang untuk organisasi modern.
           </p>
         </motion.div>
 
@@ -100,15 +100,15 @@ const Features = () => {
           <div className="grid md:grid-cols-3 gap-8 text-center">
             <div>
               <div className="text-4xl font-bold mb-2">99.9%</div>
-              <div className="text-blue-200">Uptime Guarantee</div>
+              <div className="text-blue-200">Jaminan Uptime</div>
             </div>
             <div>
               <div className="text-4xl font-bold mb-2">24/7</div>
-              <div className="text-blue-200">Enterprise Support</div>
+              <div className="text-blue-200">Dukungan Perusahaan</div>
             </div>
             <div>
               <div className="text-4xl font-bold mb-2">ISO 27001</div>
-              <div className="text-blue-200">Certified Security</div>
+              <div className="text-blue-200">Keamanan Bersertifikat</div>
             </div>
           </div>
         </motion.div>

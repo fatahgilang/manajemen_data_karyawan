@@ -25,6 +25,8 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->id('admin')
             ->path('admin')
+            // Enable Filament-built authentication pages
+            ->login()
             ->colors([
                 'primary' => Color::Amber,
             ])

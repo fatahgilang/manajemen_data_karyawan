@@ -13,7 +13,10 @@ class Attendance extends Model
         'clock_out',
         'latitude',
         'longitude',
+        'accuracy',
         'status',
+        'check_in_photo_path',
+        'check_out_photo_path',
     ];
 
     protected $casts = [

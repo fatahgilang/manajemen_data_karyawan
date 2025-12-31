@@ -67,7 +67,7 @@ const Contact = () => {
             transition={{ duration: 0.6 }}
             className="text-4xl font-bold text-gray-900 mb-4"
           >
-            Ready to Transform Your <span className="text-blue-900">HR Operations?</span>
+            Siap Mengubah <span className="text-blue-900">Operasi HR Anda?</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 30 }}
@@ -76,8 +76,7 @@ const Contact = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-xl text-gray-600 max-w-3xl mx-auto"
           >
-            Get in touch with our enterprise solutions team to learn how our HRIS platform 
-            can revolutionize your human resources management.
+            Hubungi tim solusi perusahaan kami untuk mengetahui bagaimana platform HRIS kami dapat merevolusi manajemen sumber daya manusia Anda.
           </motion.p>
         </div>
 
@@ -105,12 +104,12 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                    placeholder="John Smith"
+                    placeholder="Budi Setiawan"
                   />
                 </div>
                 <div>
                   <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
-                    Company
+                    Perusahaan
                   </label>
                   <input
                     type="text"
@@ -120,13 +119,13 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                    placeholder="Your Company"
+                    placeholder="Perusahaan Anda"
                   />
                 </div>
               </div>
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                  Email Address
+                  Alamat Email
                 </label>
                 <input
                   type="email"
@@ -136,12 +135,12 @@ const Contact = () => {
                   onChange={handleChange}
                   required
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                  placeholder="john@company.com"
+                  placeholder="budi@perusahaan.com"
                 />
               </div>
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                  Message
+                  Pesan
                 </label>
                 <textarea
                   id="message"
@@ -151,14 +150,14 @@ const Contact = () => {
                   required
                   rows={5}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none"
-                  placeholder="Tell us about your HR needs..."
+                  placeholder="Ceritakan kebutuhan HR Anda..."
                 ></textarea>
               </div>
               <button
                 type="submit"
                 className="w-full px-8 py-4 bg-blue-900 text-white rounded-lg hover:bg-blue-800 transition-all duration-300 font-semibold text-lg shadow-lg hover:shadow-xl"
               >
-                Send Message
+                Kirim Pesan
               </button>
             </form>
           </motion.div>
@@ -172,7 +171,7 @@ const Contact = () => {
             className="space-y-8"
           >
             <div className="bg-gradient-to-br from-blue-900 to-slate-900 rounded-2xl p-8 text-white">
-              <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
+              <h3 className="text-2xl font-bold mb-6">Informasi Kontak</h3>
               <div className="space-y-6">
                 {contactInfo.map((item, index) => (
                   <div key={index} className="flex items-start space-x-4">
@@ -191,18 +190,18 @@ const Contact = () => {
 
             {/* Trust Section */}
             <div className="bg-gray-50 p-8 rounded-2xl">
-              <h4 className="text-xl font-bold text-gray-900 mb-4">Enterprise Trust</h4>
+              <h4 className="text-xl font-bold text-gray-900 mb-4">Kepercayaan Perusahaan</h4>
               <p className="text-gray-600 mb-6">
-                We're trusted by leading enterprises worldwide for secure, reliable HR management solutions.
+                Kami dipercaya oleh perusahaan terkemuka di seluruh dunia untuk solusi manajemen HR yang aman dan andal.
               </p>
               <div className="grid grid-cols-2 gap-4">
                 <div className="text-center p-4 bg-white rounded-lg border border-gray-200">
                   <div className="text-2xl font-bold text-blue-900">99.9%</div>
-                  <div className="text-sm text-gray-600">Uptime</div>
+                  <div className="text-sm text-gray-600">Waktu Aktif</div>
                 </div>
                 <div className="text-center p-4 bg-white rounded-lg border border-gray-200">
                   <div className="text-2xl font-bold text-blue-900">24/7</div>
-                  <div className="text-sm text-gray-600">Support</div>
+                  <div className="text-sm text-gray-600">Dukungan</div>
                 </div>
               </div>
             </div>

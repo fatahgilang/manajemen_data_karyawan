@@ -22,6 +22,10 @@ class DepartmentResource extends Resource
     protected static ?string $model = Department::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+protected static ?string $modelLabel = 'Departemen';
+protected static ?string $pluralModelLabel = 'Departemen';
+protected static ?string $navigationLabel = 'Departemen';
+protected static ?string $navigationGroup = 'Organisasi';
 
     public static function form(Form $form): Form
     {
@@ -29,7 +33,8 @@ class DepartmentResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->label('Nama Departemen'),
             ]);
     }
 
@@ -38,6 +43,7 @@ class DepartmentResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->label('Nama Departemen')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

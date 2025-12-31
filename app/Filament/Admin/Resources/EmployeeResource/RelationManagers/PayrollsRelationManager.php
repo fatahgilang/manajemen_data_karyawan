@@ -4,10 +4,12 @@ namespace App\Filament\Admin\Resources\EmployeeResource\RelationManagers;
 
 use App\Models\Payroll;
 use Filament\Forms;
+use Filament\Forms\Components\TextInput\Mask;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Support\RawJs;
 
 class PayrollsRelationManager extends RelationManager
 {
@@ -22,20 +24,28 @@ class PayrollsRelationManager extends RelationManager
                 Forms\Components\DatePicker::make('pay_period_end')
                     ->required(),
                 Forms\Components\TextInput::make('basic_salary')
-                    ->numeric()
-                    ->prefix('Rp')
+                    ->prefix('Rp ')
+                    ->mask(RawJs::make('$money($input, ".", ",", 0)'))
+                    ->dehydrateStateUsing(fn ($state) => is_numeric($state) ? (float) $state : (float) str_replace(',', '.', str_replace('.', '', preg_replace('/[^0-9,.-]/', '', (string) $state))))
                     ->required(),
                 Forms\Components\TextInput::make('allowances')
-                    ->numeric()
-                    ->prefix('Rp')
-                    ->default(0),
+                    ->default(0)
+                    ->prefix('Rp ')
+                    ->mask(RawJs::make('$money($input, ".", ",", 0)'))
+                    ->dehydrateStateUsing(fn ($state) => is_numeric($state) ? (float) $state : (float) str_replace(',', '.', str_replace('.', '', preg_replace('/[^0-9,.-]/', '', (string) $state))))
+                    ->required(),
                 Forms\Components\TextInput::make('deductions')
-                    ->numeric()
-                    ->prefix('Rp')
-                    ->default(0),
+                    ->default(0)
+                    ->prefix('Rp ')
+                    ->mask(RawJs::make('$money($input, ".", ",", 0)'))
+                    ->dehydrateStateUsing(fn ($state) => is_numeric($state) ? (float) $state : (float) str_replace(',', '.', str_replace('.', '', preg_replace('/[^0-9,.-]/', '', (string) $state))))
+                    ->required(),
                 Forms\Components\TextInput::make('total_pay')
-                    ->numeric()
-                    ->prefix('Rp')
+                    ->prefix('Rp ')
+                    ->mask(RawJs::make('$money($input, ".", ",", 0)'))
+                    ->dehydrateStateUsing(fn ($state) => is_numeric($state) ? (float) $state : (float) str_replace(',', '.', str_replace('.', '', preg_replace('/[^0-9,.-]/', '', (string) $state))))
+                    ->required()
+                    // Hapus konfigurasi numeric()/prefix('Rp') duplikat jika masih ada dalam file
                     ->required(),
                 Forms\Components\DatePicker::make('payment_date'),
                 Forms\Components\Select::make('status')
@@ -61,10 +71,10 @@ class PayrollsRelationManager extends RelationManager
                     ->date()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('basic_salary')
-                    ->money('idr')
+                    ->formatStateUsing(fn ($state) => 'Rp ' . number_format((float) $state, 0, ',', '.'))
                     ->sortable(),
                 Tables\Columns\TextColumn::make('total_pay')
-                    ->money('idr')
+                    ->formatStateUsing(fn ($state) => 'Rp ' . number_format((float) $state, 0, ',', '.'))
                     ->sortable(),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()

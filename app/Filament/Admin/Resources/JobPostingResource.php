@@ -20,6 +20,10 @@ class JobPostingResource extends Resource
     protected static ?string $model = JobPosting::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+protected static ?string $modelLabel = 'Lowongan';
+protected static ?string $pluralModelLabel = 'Lowongan';
+protected static ?string $navigationLabel = 'Lowongan';
+protected static ?string $navigationGroup = 'Rekrutmen';
 
     public static function form(Form $form): Form
     {
@@ -27,20 +31,27 @@ class JobPostingResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('title')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->label('Judul Lowongan'),
                 Forms\Components\Textarea::make('description')
                     ->required()
-                    ->columnSpanFull(),
+                    ->label('Deskripsi'),
                 Forms\Components\Textarea::make('requirements')
                     ->required()
+                    ->label('Persyaratan')
                     ->columnSpanFull(),
+                Forms\Components\DatePicker::make('posted_date')
+                    ->label('Tanggal Posting'),
                 Forms\Components\Select::make('status')
                     ->options([
-                        'Open' => 'Open',
-                        'Closed' => 'Closed',
+                        'Open' => 'Dibuka',
+                        'Closed' => 'Ditutup',
                     ])
                     ->default('Open')
-                    ->required(),
+                    ->required()
+                    ->label('Status')
+                    ->columnSpanFull(),
+
             ]);
     }
 
@@ -49,8 +60,14 @@ class JobPostingResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title')
+                    ->label('Judul Lowongan')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('posted_date')
+                    ->label('Tanggal Posting')
+                    ->date()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('status')
+                    ->label('Status')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
                         'Open' => 'success',

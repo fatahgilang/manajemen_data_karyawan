@@ -19,7 +19,8 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['http://localhost:5173'],
+    // Dev: izinkan semua origin agar mudah debugging
+    'allowed_origins' => ['*'],
 
     'allowed_origins_patterns' => [],
 

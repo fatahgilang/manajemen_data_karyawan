@@ -1,22 +1,68 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Header = ({ isScrolled }) => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const location = useLocation();
+  const navigate = useNavigate();
 
-  const navItems = [
-    { name: 'Home', path: '/' },
-    { name: 'Features', path: '/' },
-    { name: 'About', path: '/' },
-    { name: 'Contact', path: '/' },
-    { name: 'Employees', path: '/employees' },
-    { name: 'Departments', path: '/departments' },
-    { name: 'Positions', path: '/positions' },
-  ];
+  const isLoggedIn = !!localStorage.getItem('token');
+  const navItems = isLoggedIn
+    ? [
+        { name: 'Beranda', path: '/' },
+        { name: 'Fitur', path: '/#features' },
+        { name: 'Tentang', path: '/#about' },
+        { name: 'Kontak', path: '/#contact' },
+        { name: 'Lowongan', path: '/job-postings' },
+        { name: 'Absensi', path: '/attendance' },
+      ]
+    : [
+        { name: 'Beranda', path: '/' },
+        { name: 'Fitur', path: '/#features' },
+        { name: 'Tentang', path: '/#about' },
+        { name: 'Kontak', path: '/#contact' },
+        { name: 'Lowongan', path: '/job-postings' },
+      ];
+
+  const handleNavClick = (e, item) => {
+    // Handle hash navigation for homepage sections using Router
+    if (item.path.includes('#')) {
+      e.preventDefault();
+      setIsMenuOpen(false);
+      const sectionId = item.path.split('#')[1];
+      if (location.pathname === '/') {
+        const el = document.getElementById(sectionId);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        } else {
+          window.location.hash = `#${sectionId}`;
+        }
+      } else {
+        // Navigate via Router without full reload, then scroll programmatically
+        navigate('/', { state: { scrollTo: sectionId } });
+      }
+    } else {
+      setIsMenuOpen(false);
+    }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('employee_id');
+    setIsMenuOpen(false);
+    navigate('/');
+  };
+
+  const isActive = (item) => {
+    if (item.path.includes('#')) {
+      const hash = item.path.substring(item.path.indexOf('#'));
+      return location.pathname === '/' && location.hash === hash;
+    }
+    return location.pathname === item.path;
+  };
 
   return (
     <motion.header
@@ -35,7 +81,7 @@ const Header = ({ isScrolled }) => {
             <div className="w-10 h-10 rounded-lg bg-blue-900 flex items-center justify-center">
               <span className="text-white font-bold text-xl">HR</span>
             </div>
-            <span className="ml-3 text-xl font-bold text-gray-900">Enterprise HRIS</span>
+            <span className="ml-3 text-xl font-bold text-gray-900">HRIS Perusahaan</span>
           </div>
 
           {/* Desktop Navigation */}
@@ -44,8 +90,8 @@ const Header = ({ isScrolled }) => {
               <Link
                 key={item.name}
                 to={item.path}
-                className={`text-gray-700 hover:text-blue-900 font-medium transition-colors duration-200 ${location.pathname === item.path ? 'text-blue-900 font-semibold' : ''}`}
-                onClick={() => setIsMenuOpen(false)}
+                className={`text-gray-700 hover:text-blue-900 font-medium transition-colors duration-200 ${isActive(item) ? 'text-blue-900 font-semibold' : ''}`}
+                onClick={(e) => handleNavClick(e, item)}
               >
                 {item.name}
               </Link>
@@ -54,26 +100,24 @@ const Header = ({ isScrolled }) => {
 
           {/* CTA Button */}
           <div className="hidden md:flex items-center space-x-4">
-            <Link
-              to="/"
-              className="px-6 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-800 transition-colors duration-200 font-medium"
-              onClick={(e) => {
-                e.preventDefault();
-                setIsMenuOpen(false);
-                // Scroll to contact section on home page
-                if (location.pathname === '/') {
-                  const contactElement = document.getElementById('contact');
-                  if (contactElement) {
-                    contactElement.scrollIntoView({ behavior: 'smooth' });
-                  }
-                } else {
-                  // Navigate to home and then scroll
-                  window.location.href = '/#contact';
-                }
-              }}
-            >
-              Get Started
-            </Link>
+            {isLoggedIn ? (
+              <button
+                onClick={handleLogout}
+                className="px-6 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors duration-200 font-medium"
+              >
+                Keluar
+              </button>
+            ) : (
+              <Link
+                to="/attendance-login"
+                className="px-6 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-800 transition-colors duration-200 font-medium"
+                onClick={() => {
+                  setIsMenuOpen(false);
+                }}
+              >
+                Login
+              </Link>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -101,32 +145,32 @@ const Header = ({ isScrolled }) => {
                 <Link
                   key={item.name}
                   to={item.path}
-                  className={`text-gray-700 hover:text-blue-900 font-medium py-2 ${location.pathname === item.path ? 'text-blue-900 font-semibold' : ''}`}
-                  onClick={() => setIsMenuOpen(false)}
+                  className={`text-gray-700 hover:text-blue-900 font-medium py-2 ${isActive(item) ? 'text-blue-900 font-semibold' : ''}`}
+                  onClick={(e) => handleNavClick(e, item)}
                 >
                   {item.name}
                 </Link>
               ))}
-              <Link
-                to="/"
-                className="px-6 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-800 transition-colors duration-200 font-medium text-center"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setIsMenuOpen(false);
-                  // Scroll to contact section on home page
-                  if (location.pathname === '/') {
-                    const contactElement = document.getElementById('contact');
-                    if (contactElement) {
-                      contactElement.scrollIntoView({ behavior: 'smooth' });
-                    }
-                  } else {
-                    // Navigate to home and then scroll
-                    window.location.href = '/#contact';
-                  }
-                }}
-              >
-                Get Started
-              </Link>
+              {isLoggedIn ? (
+                <button
+                  className="px-6 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors duration-200 font-medium text-center"
+                  onClick={() => {
+                    handleLogout();
+                  }}
+                >
+                  Keluar
+                </button>
+              ) : (
+                <Link
+                  to="/attendance-login"
+                  className="px-6 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-800 transition-colors duration-200 font-medium text-center"
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                  }}
+                >
+                  Login
+                </Link>
+              )}
             </div>
           </motion.div>
         )}

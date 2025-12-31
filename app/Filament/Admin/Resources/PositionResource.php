@@ -22,6 +22,10 @@ class PositionResource extends Resource
     protected static ?string $model = Position::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $modelLabel = 'Jabatan';
+    protected static ?string $pluralModelLabel = 'Jabatan';
+    protected static ?string $navigationLabel = 'Jabatan';
+    protected static ?string $navigationGroup = 'Organisasi';
 
     public static function form(Form $form): Form
     {
@@ -29,11 +33,13 @@ class PositionResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('title')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->label('Jabatan'),
                 Forms\Components\TextInput::make('base_salary')
                     ->numeric()
                     ->prefix('Rp')
-                    ->required(),
+                    ->required()
+                    ->label('Gaji Pokok'),
             ]);
     }
 
@@ -42,8 +48,10 @@ class PositionResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title')
+                    ->label('Jabatan')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('base_salary')
+                    ->label('Gaji Pokok')
                     ->money('idr')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')

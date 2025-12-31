@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (!Schema::hasColumn('employees', 'deleted_at')) {
         Schema::table('employees', function (Blueprint $table) {
-            $table->softDeletes();
+            $table->string('phone_number', 20)->nullable()->after('email');
         });
-    }
     }
 
     /**
@@ -24,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('employees', function (Blueprint $table) {
-            $table->dropSoftDeletes();
+            $table->dropColumn('phone_number');
         });
     }
 };

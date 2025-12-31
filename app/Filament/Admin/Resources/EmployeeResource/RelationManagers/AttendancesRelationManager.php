@@ -8,6 +8,8 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Tables\Columns\ImageColumn;
+use Illuminate\Support\Facades\Storage; // tambah import
 
 class AttendancesRelationManager extends RelationManager
 {
@@ -38,30 +40,35 @@ class AttendancesRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('date')
             ->columns([
                 Tables\Columns\TextColumn::make('date')
+                    ->label('Tanggal')
                     ->date()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('clock_in')
+                    ->label('Jam Masuk')
                     ->time()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('clock_out')
+                    ->label('Jam Pulang')
                     ->time()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('status')
-                    ->badge()
-                    ->color(fn (string $state): string => match ($state) {
-                        'Hadir' => 'success',
-                        'Izin' => 'warning',
-                        'Sakit' => 'info',
-                        'Alpha' => 'danger',
-                        default => 'gray',
-                    }),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->label('Status')
+                    ->badge(),
+                // Foto pada relasi
+                ImageColumn::make('check_in_photo_path')
+                    ->label('Foto Masuk')
+                    ->disk('public')
+                    ->size(36)
+                    ->circular()
+                    ->toggleable(),
+                ImageColumn::make('check_out_photo_path')
+                    ->label('Foto Keluar')
+                    ->disk('public')
+                    ->size(36)
+                    ->circular()
+                    ->toggleable(),
             ])
             ->filters([
                 //

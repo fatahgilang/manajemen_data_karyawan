@@ -4,27 +4,18 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
-    /**
-     * Run the migrations.
-     */
+return new class extends Migration {
     public function up(): void
     {
-        if (!Schema::hasColumn('employees', 'deleted_at')) {
         Schema::table('employees', function (Blueprint $table) {
-            $table->softDeletes();
+            $table->timestamp('password_last_reset_at')->nullable()->after('password_plaintext_encrypted');
         });
     }
-    }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::table('employees', function (Blueprint $table) {
-            $table->dropSoftDeletes();
+            $table->dropColumn('password_last_reset_at');
         });
     }
 };

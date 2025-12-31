@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
   return (
@@ -30,7 +31,7 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.6 }}
             >
-              Transform Your <span className="text-blue-900">HR Operations</span> with Enterprise Excellence
+              Transformasikan <span className="text-blue-900">Operasi HR Anda</span> dengan Keunggulan Perusahaan
             </motion.h1>
             
             <motion.p
@@ -39,8 +40,8 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.6 }}
             >
-              Streamline your human resources management with our comprehensive HRIS solution. 
-              Designed for enterprise-level organizations seeking efficiency, compliance, and strategic insights.
+              Sederhanakan manajemen sumber daya manusia Anda dengan solusi HRIS komprehensif. 
+              Dirancang untuk organisasi tingkat perusahaan yang mengutamakan efisiensi, kepatuhan, dan wawasan strategis.
             </motion.p>
 
             <motion.div
@@ -49,18 +50,18 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.6 }}
             >
-              <a
-                href="#contact"
+              <Link
+                to="/attendance-login"
                 className="px-8 py-4 bg-blue-900 text-white rounded-xl hover:bg-blue-800 transition-all duration-300 font-semibold text-lg flex items-center justify-center group shadow-lg hover:shadow-xl"
               >
-                Get Started
+                Login
                 <ArrowRightIcon className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-200" />
-              </a>
+              </Link>
               <a
                 href="#features"
                 className="px-8 py-4 border-2 border-blue-900 text-blue-900 rounded-xl hover:bg-blue-900 hover:text-white transition-all duration-300 font-semibold text-lg"
               >
-                Learn More
+                Pelajari Lebih Lanjut
               </a>
             </motion.div>
 
@@ -73,7 +74,7 @@ const Hero = () => {
             >
               <div className="text-center">
                 <div className="text-2xl font-bold text-blue-900">500+</div>
-                <div className="text-sm text-gray-600">Enterprise Clients</div>
+                <div className="text-sm text-gray-600">Klien Perusahaan</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-blue-900">99.9%</div>
@@ -81,7 +82,7 @@ const Hero = () => {
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-blue-900">24/7</div>
-                <div className="text-sm text-gray-600">Support</div>
+                <div className="text-sm text-gray-600">Dukungan</div>
               </div>
             </motion.div>
           </motion.div>
@@ -105,7 +106,7 @@ const Hero = () => {
                       <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
                       <div className="w-3 h-3 bg-green-400 rounded-full"></div>
                     </div>
-                    <div className="text-sm text-gray-500">HR Dashboard</div>
+                    <div className="text-sm text-gray-500">Dasbor HR</div>
                   </div>
                   
                   <div className="space-y-4">
@@ -115,12 +116,12 @@ const Hero = () => {
                           <span className="text-blue-900 font-bold">E</span>
                         </div>
                         <div>
-                          <div className="font-medium text-gray-900">Employee Management</div>
-                          <div className="text-sm text-gray-500">1,248 employees</div>
+                          <div className="font-medium text-gray-900">Manajemen Karyawan</div>
+                          <div className="text-sm text-gray-500">1.248 karyawan</div>
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="text-sm font-medium text-green-600">Active</div>
+                        <div className="text-sm font-medium text-green-600">Aktif</div>
                       </div>
                     </div>
                     
@@ -130,12 +131,12 @@ const Hero = () => {
                           <span className="text-green-900 font-bold">P</span>
                         </div>
                         <div>
-                          <div className="font-medium text-gray-900">Payroll Processing</div>
-                          <div className="text-sm text-gray-500">Monthly cycle</div>
+                          <div className="font-medium text-gray-900">Proses Penggajian</div>
+                          <div className="text-sm text-gray-500">Siklus bulanan</div>
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="text-sm font-medium text-green-600">Completed</div>
+                        <div className="text-sm font-medium text-green-600">Selesai</div>
                       </div>
                     </div>
                     
@@ -145,19 +146,19 @@ const Hero = () => {
                           <span className="text-purple-900 font-bold">A</span>
                         </div>
                         <div>
-                          <div className="font-medium text-gray-900">Attendance Tracking</div>
+                          <div className="font-medium text-gray-900">Pelacakan Absensi</div>
                           <div className="text-sm text-gray-500">Real-time</div>
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="text-sm font-medium text-yellow-600">In Progress</div>
+                        <div className="text-sm font-medium text-yellow-600">Dalam Proses</div>
                       </div>
                     </div>
                   </div>
                 </div>
                 
                 <div className="text-center">
-                  <div className="text-sm text-gray-600 mb-2">Trusted by industry leaders</div>
+                  <div className="text-sm text-gray-600 mb-2">Dipercaya oleh pemimpin industri</div>
                   <div className="flex items-center justify-center space-x-8 opacity-60">
                     <div className="text-lg font-bold text-gray-800">Enterprise</div>
                     <div className="text-lg font-bold text-gray-800">Corp</div>

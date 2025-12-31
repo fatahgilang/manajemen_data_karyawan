@@ -6,34 +6,58 @@ import {
   BuildingOfficeIcon,
   LinkIcon
 } from '@heroicons/react/24/outline';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const quickLinks = [
-    { name: 'Home', href: '#' },
-    { name: 'Features', href: '#features' },
-    { name: 'About', href: '#about' },
-    { name: 'Contact', href: '#contact' },
-    { name: 'Pricing', href: '#' },
-    { name: 'Documentation', href: '#' }
+    { name: 'Beranda', href: '/' },
+    { name: 'Fitur', href: '/#features' },
+    { name: 'Tentang', href: '/#about' },
+    { name: 'Kontak', href: '/#contact' },
+    { name: 'Harga', href: '#' },
+    { name: 'Dokumentasi', href: '#' }
   ];
 
   const resources = [
     { name: 'Blog', href: '#' },
-    { name: 'Help Center', href: '#' },
-    { name: 'API Documentation', href: '#' },
-    { name: 'Community', href: '#' },
-    { name: 'Support', href: '#' },
+    { name: 'Pusat Bantuan', href: '#' },
+    { name: 'Dokumentasi API', href: '#' },
+    { name: 'Komunitas', href: '#' },
+    { name: 'Dukungan', href: '#' },
     { name: 'Status', href: '#' }
   ];
 
   const legal = [
-    { name: 'Privacy Policy', href: '#' },
-    { name: 'Terms of Service', href: '#' },
-    { name: 'Security', href: '#' },
-    { name: 'Compliance', href: '#' }
+    { name: 'Kebijakan Privasi', href: '#' },
+    { name: 'Syarat Layanan', href: '#' },
+    { name: 'Keamanan', href: '#' },
+    { name: 'Kepatuhan', href: '#' }
   ];
+
+  const handleQuickLinkClick = (e, href) => {
+    e.preventDefault();
+    const sectionId = href.startsWith('/#') ? href.split('#')[1] : null;
+
+    if (sectionId) {
+      if (location.pathname === '/') {
+        const el = document.getElementById(sectionId);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        } else {
+          window.location.hash = `#${sectionId}`;
+        }
+      } else {
+        // Navigate to home via Router, then scroll programatically
+        navigate('/', { state: { scrollTo: sectionId } });
+      }
+    } else {
+      navigate(href);
+    }
+  };
 
   return (
     <footer className="bg-gray-900 text-white">
@@ -45,11 +69,10 @@ const Footer = () => {
               <div className="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center">
                 <span className="text-white font-bold text-xl">HR</span>
               </div>
-              <span className="text-xl font-bold">Enterprise HRIS</span>
+              <span className="text-xl font-bold">HRIS Perusahaan</span>
             </div>
             <p className="text-gray-400 mb-6 leading-relaxed">
-              Transforming human resources management with cutting-edge technology 
-              and enterprise-grade solutions for modern organizations.
+              Mengubah manajemen sumber daya manusia dengan teknologi mutakhir dan solusi kelas perusahaan untuk organisasi modern.
             </p>
             <div className="flex space-x-4">
               <a href="#" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors duration-200">
@@ -69,16 +92,26 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-bold text-lg mb-6">Quick Links</h4>
+            <h3 className="text-white font-semibold mb-4">Tautan Cepat</h3>
             <ul className="space-y-3">
               {quickLinks.slice(0, 6).map((link, index) => (
                 <li key={index}>
-                  <a 
-                    href={link.href} 
-                    className="text-gray-400 hover:text-white transition-colors duration-200"
-                  >
-                    {link.name}
-                  </a>
+                  {link.href.startsWith('/') ? (
+                    <Link 
+                      to={link.href}
+                      className="text-gray-400 hover:text-white transition-colors duration-200"
+                      onClick={(e) => handleQuickLinkClick(e, link.href)}
+                    >
+                      {link.name}
+                    </Link>
+                  ) : (
+                    <a 
+                      href={link.href} 
+                      className="text-gray-400 hover:text-white transition-colors duration-200"
+                    >
+                      {link.name}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>
@@ -86,7 +119,7 @@ const Footer = () => {
 
           {/* Resources */}
           <div>
-            <h4 className="font-bold text-lg mb-6">Resources</h4>
+            <h3 className="text-white font-semibold mb-4">Sumber Daya</h3>
             <ul className="space-y-3">
               {resources.slice(0, 6).map((resource, index) => (
                 <li key={index}>
@@ -103,7 +136,7 @@ const Footer = () => {
 
           {/* Legal */}
           <div>
-            <h4 className="font-bold text-lg mb-6">Legal</h4>
+            <h3 className="text-white font-semibold mb-4">Legal</h3>
             <ul className="space-y-3">
               {legal.slice(0, 4).map((item, index) => (
                 <li key={index}>
@@ -125,14 +158,14 @@ const Footer = () => {
         {/* Bottom Section */}
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm mb-4 md:mb-0">
-            © {currentYear} Enterprise HRIS. All rights reserved.
+            © {currentYear} HRIS Perusahaan. Hak cipta dilindungi.
           </p>
           <div className="flex items-center space-x-6 text-sm text-gray-400">
             <span className="flex items-center">
               <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
               Live Status
             </span>
-            <span>Trusted by 500+ enterprises</span>
+            <span>Dipercaya oleh 500+ perusahaan</span>
           </div>
         </div>
       </div>
