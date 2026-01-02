@@ -43,3 +43,23 @@ npm run dev
 
 ## Lisensi
 Berbasis skeleton Laravel (MIT).
+
+## Deploy Gratis
+- Frontend (Vercel):
+  - Import repo `hris-frontend`.
+  - Set `VITE_API_BASE_URL=https://YOUR_BACKEND_DOMAIN`.
+  - Build `npm run build`, output `dist`.
+
+- Backend (Railway):
+  - Deploy dari GitHub repo backend.
+  - Tambahkan `Procfile` dengan `web: php -S 0.0.0.0:$PORT -t public`.
+  - Env: `APP_ENV=production`, `APP_DEBUG=false`, `APP_KEY` (hasil `php artisan key:generate --show`), `DB_CONNECTION=sqlite`, optional `CORS_ALLOWED_ORIGINS` set ke domain Vercel.
+  - Pastikan `database/database.sqlite` ada (file kosong).
+  - Release command: `php artisan migrate --force`.
+
+- CORS:
+  - Set `CORS_ALLOWED_ORIGINS` (mis. `https://your-frontend.vercel.app`).
+
+- Catatan:
+  - Gratis berarti kuota terbatas/sleep saat idle.
+  - Untuk performa produksi gunakan Nginx+PHP-FPM (contoh Docker/Fly.io).

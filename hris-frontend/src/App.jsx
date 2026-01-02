@@ -12,6 +12,8 @@ import Positions from './components/Positions';
 import JobPostings from './components/JobPostings';
 import Attendance from './components/Attendance';
 import AttendanceLogin from './components/AttendanceLogin';
+import Documents from './components/Documents';
+import Approvals from './components/Approvals';
 
 const ScrollAwareLayout = () => {
   const location = useLocation();
@@ -63,6 +65,8 @@ const ScrollAwareLayout = () => {
           <Route path="/positions" element={<Positions />} />
           <Route path="/job-postings" element={<JobPostings />} />
           <Route path="/attendance" element={<Attendance />} />
+          <Route path="/documents" element={<Documents />} />
+          <Route path="/approvals" element={<Approvals />} />
         </Routes>
       </main>
       <Footer />

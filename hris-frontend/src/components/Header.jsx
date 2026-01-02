@@ -18,13 +18,19 @@ const Header = ({ isScrolled }) => {
         { name: 'Kontak', path: '/#contact' },
         { name: 'Karir', path: '/job-postings' },
         { name: 'Absensi', path: '/attendance' },
+        // Tambahan menu
+        { name: 'Dokumen', path: '/documents' },
+        { name: 'Persetujuan', path: '/approvals' },
       ]
     : [
         { name: 'Beranda', path: '/' },
         { name: 'Layanan', path: '/#features' },
         { name: 'Tentang Kami', path: '/#about' },
         { name: 'Kontak', path: '/#contact' },
-        { name: 'Karir', path: '/job-postings' },
+        { name: 'Lowongan', path: '/job-postings' },
+        // Tambahan menu
+        { name: 'Dokumen', path: '/documents' },
+        { name: 'Persetujuan', path: '/approvals' },
       ];
 
   const handleNavClick = (e, item) => {
@@ -153,20 +159,16 @@ const Header = ({ isScrolled }) => {
               ))}
               {isLoggedIn ? (
                 <button
-                  className="px-6 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors duration-200 font-medium text-center"
-                  onClick={() => {
-                    handleLogout();
-                  }}
+                  onClick={handleLogout}
+                  className="mt-2 px-6 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors duration-200 font-medium"
                 >
                   Keluar
                 </button>
               ) : (
                 <Link
                   to="/attendance-login"
-                  className="px-6 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-800 transition-colors duration-200 font-medium text-center"
-                  onClick={() => {
-                    setIsMenuOpen(false);
-                  }}
+                  className="mt-2 px-6 py-2 bg-blue-900 text-white rounded-lg hover:bg-blue-800 transition-colors duration-200 font-medium"
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   Login
                 </Link>

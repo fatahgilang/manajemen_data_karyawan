@@ -23,6 +23,21 @@ Route::apiResource('employees', \App\Http\Controllers\Api\EmployeeController::cl
 Route::apiResource('departments', \App\Http\Controllers\Api\DepartmentController::class);
 Route::apiResource('positions', \App\Http\Controllers\Api\PositionController::class);
 
+// Tambah: HR Documents
+Route::apiResource('documents', \App\Http\Controllers\Api\HrDocumentController::class);
+Route::post('documents/{document}/versions', [\App\Http\Controllers\Api\HrDocumentController::class, 'addVersion']);
+Route::get('documents/{document}/versions/{version}/download', [\App\Http\Controllers\Api\HrDocumentController::class, 'download']);
+
+// Tambah: Approvals
+Route::prefix('approvals')->group(function () {
+    Route::get('rules', [\App\Http\Controllers\Api\ApprovalController::class, 'rulesIndex']);
+    Route::post('rules', [\App\Http\Controllers\Api\ApprovalController::class, 'rulesUpsert']);
+    Route::get('requests', [\App\Http\Controllers\Api\ApprovalController::class, 'requestsIndex']);
+    Route::post('requests', [\App\Http\Controllers\Api\ApprovalController::class, 'requestsStore']);
+    Route::post('requests/{approvalRequest}/approve', [\App\Http\Controllers\Api\ApprovalController::class, 'approve']);
+    Route::post('requests/{approvalRequest}/reject', [\App\Http\Controllers\Api\ApprovalController::class, 'reject']);
+});
+
 // Recruitment Routes
 Route::get('job-postings', [\App\Http\Controllers\Api\JobPostingController::class, 'index']);
 Route::get('job-postings/{jobPosting}', [\App\Http\Controllers\Api\JobPostingController::class, 'show']);

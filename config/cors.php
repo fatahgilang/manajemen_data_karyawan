@@ -19,8 +19,10 @@ return [
 
     'allowed_methods' => ['*'],
 
-    // Dev: izinkan semua origin agar mudah debugging
-    'allowed_origins' => ['*'],
+    // Prod: baca domain dari env, Dev: izinkan semua origin
+    'allowed_origins' => env('CORS_ALLOWED_ORIGINS')
+        ? explode(',', env('CORS_ALLOWED_ORIGINS'))
+        : ['*'],
 
     'allowed_origins_patterns' => [],
 
