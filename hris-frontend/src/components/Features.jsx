@@ -13,38 +13,38 @@ const Features = () => {
   const features = [
     {
       icon: UserGroupIcon,
-      title: 'Manajemen Karyawan',
-      description: 'Manajemen siklus karyawan dari onboarding hingga offboarding dengan penyimpanan dan pengelolaan data terpusat.',
+      title: 'Penyediaan Tenaga Kerja',
+      description: 'Rekrutmen dan penempatan tenaga kerja profesional siap kerja untuk berbagai posisi sesuai kebutuhan industri Anda.',
       color: 'bg-blue-100 text-blue-600'
     },
     {
       icon: CurrencyDollarIcon,
-      title: 'Proses Penggajian',
-      description: 'Perhitungan gaji otomatis, potongan pajak, dan dukungan multi-mata uang untuk perusahaan global.',
+      title: 'Payroll Outsourcing',
+      description: 'Manajemen penggajian yang akurat, perhitungan pajak, dan distribusi gaji karyawan yang tepat waktu.',
       color: 'bg-green-100 text-green-600'
     },
     {
       icon: ClockIcon,
-      title: 'Pelacakan Absensi',
-      description: 'Pemantauan absensi real-time dengan pelacakan lokasi GPS, integrasi biometrik, dan manajemen cuti.',
+      title: 'Manajemen Kehadiran',
+      description: 'Sistem pemantauan absensi real-time untuk memastikan disiplin dan produktivitas tenaga kerja di lapangan.',
       color: 'bg-purple-100 text-purple-600'
     },
     {
       icon: DocumentTextIcon,
-      title: 'Manajemen Kinerja',
-      description: 'Penetapan tujuan, penilaian kinerja, dan umpan balik 360 derajat dengan laporan dan analitik otomatis.',
+      title: 'Evaluasi Kinerja Berkala',
+      description: 'Penilaian rutin terhadap kinerja tenaga kerja untuk menjamin kualitas layanan yang diberikan kepada klien.',
       color: 'bg-orange-100 text-orange-600'
     },
     {
       icon: ShieldCheckIcon,
-      title: 'Manajemen Kepatuhan',
-      description: 'Tetap patuh pada hukum ketenagakerjaan lokal dan standar industri dengan pemeriksaan kepatuhan otomatis.',
+      title: 'Kepatuhan Hukum',
+      description: 'Menjamin seluruh proses ketenagakerjaan sesuai dengan regulasi dan undang-undang yang berlaku di Indonesia.',
       color: 'bg-red-100 text-red-600'
     },
     {
       icon: ChartBarIcon,
-      title: 'Analitik & Pelaporan',
-      description: 'Dasbor analitik canggih dengan laporan yang dapat disesuaikan, KPI, dan wawasan prediktif untuk pengambilan keputusan strategis.',
+      title: 'Laporan & Analisis SDM',
+      description: 'Penyediaan laporan komprehensif terkait performa tenaga kerja dan efisiensi operasional secara berkala.',
       color: 'bg-indigo-100 text-indigo-600'
     }
   ];
@@ -61,11 +61,11 @@ const Features = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            Solusi <span className="text-blue-900">HR Komprehensif</span>
+            Layanan <span className="text-blue-900">Outsourcing Terintegrasi</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Platform HRIS perusahaan kami menyediakan manajemen sumber daya manusia end-to-end 
-            dengan fitur kuat yang dirancang untuk organisasi modern.
+            Kami menawarkan berbagai layanan outsourcing yang dirancang untuk meningkatkan efisiensi operasional 
+            dan mengurangi beban administratif perusahaan Anda.
           </p>
         </motion.div>
 

@@ -13,18 +13,18 @@ const Header = ({ isScrolled }) => {
   const navItems = isLoggedIn
     ? [
         { name: 'Beranda', path: '/' },
-        { name: 'Fitur', path: '/#features' },
-        { name: 'Tentang', path: '/#about' },
+        { name: 'Layanan', path: '/#features' },
+        { name: 'Tentang Kami', path: '/#about' },
         { name: 'Kontak', path: '/#contact' },
-        { name: 'Lowongan', path: '/job-postings' },
+        { name: 'Karir', path: '/job-postings' },
         { name: 'Absensi', path: '/attendance' },
       ]
     : [
         { name: 'Beranda', path: '/' },
-        { name: 'Fitur', path: '/#features' },
-        { name: 'Tentang', path: '/#about' },
+        { name: 'Layanan', path: '/#features' },
+        { name: 'Tentang Kami', path: '/#about' },
         { name: 'Kontak', path: '/#contact' },
-        { name: 'Lowongan', path: '/job-postings' },
+        { name: 'Karir', path: '/job-postings' },
       ];
 
   const handleNavClick = (e, item) => {
@@ -81,7 +81,7 @@ const Header = ({ isScrolled }) => {
             <div className="w-10 h-10 rounded-lg bg-blue-900 flex items-center justify-center">
               <span className="text-white font-bold text-xl">HR</span>
             </div>
-            <span className="ml-3 text-xl font-bold text-gray-900">HRIS Perusahaan</span>
+            <span className="ml-3 text-xl font-bold text-gray-900">PT. CCC</span>
           </div>
 
           {/* Desktop Navigation */}

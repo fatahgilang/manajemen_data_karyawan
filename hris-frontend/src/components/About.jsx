@@ -14,16 +14,16 @@ const About = () => {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-4xl font-bold text-gray-900 mb-6">
-              Memberdayakan <span className="text-blue-900">Perusahaan Modern</span> dengan Keunggulan HR
+              Menghubungkan <span className="text-blue-900">Talenta Terbaik</span> dengan Perusahaan Terkemuka
             </h2>
             <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-              Platform HRIS kami mengubah cara organisasi mengelola aset paling berharga mereka — manusia. 
-              Dengan pengalaman lebih dari satu dekade dalam solusi HR tingkat perusahaan, kami memahami tantangan kompleks 
-              yang dihadapi bisnis modern dalam manajemen talenta.
+              Sebagai mitra outsourcing strategis, kami menjembatani kesenjangan antara tenaga kerja profesional 
+              dan kebutuhan industri. Kami mengelola rekrutmen, pelatihan, dan administrasi SDM sehingga 
+              Anda dapat fokus pada pertumbuhan bisnis inti Anda.
             </p>
             <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              Kami menggabungkan teknologi mutakhir dengan keahlian HR mendalam untuk menghadirkan solusi yang tidak hanya 
-              menyederhanakan operasi tetapi juga mendorong hasil bisnis strategis dan meningkatkan pengalaman karyawan.
+              Kami menggabungkan jaringan talenta yang luas dengan proses manajemen SDM yang efisien untuk 
+              memberikan solusi tenaga kerja yang fleksibel, produktif, dan patuh terhadap regulasi.
             </p>
             
             {/* Stats */}
@@ -33,29 +33,29 @@ const About = () => {
                 <div className="text-gray-600">Tahun Pengalaman</div>
               </div>
               <div>
-                <div className="text-3xl font-bold text-blue-900 mb-2">500+</div>
+                <div className="text-3xl font-bold text-blue-900 mb-2">1000+</div>
+                <div className="text-gray-600">Tenaga Kerja Aktif</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-blue-900 mb-2">50+</div>
                 <div className="text-gray-600">Klien Perusahaan</div>
               </div>
               <div>
-                <div className="text-3xl font-bold text-blue-900 mb-2">99.9%</div>
-                <div className="text-gray-600">Kepuasan Pelanggan</div>
-              </div>
-              <div>
                 <div className="text-3xl font-bold text-blue-900 mb-2">24/7</div>
-                <div className="text-gray-600">Dukungan Tersedia</div>
+                <div className="text-gray-600">Dukungan Layanan</div>
               </div>
             </div>
             
             {/* Trust Badges */}
             <div className="flex flex-wrap gap-4">
               <div className="px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-medium">
-                ISO 27001 Tersertifikasi
+                Legalitas Resmi
               </div>
               <div className="px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
-                SOC 2 Tipe II
+                Tenaga Terlatih
               </div>
               <div className="px-4 py-2 bg-purple-100 text-purple-800 rounded-full text-sm font-medium">
-                GDPR Patuh
+                Sesuai Regulasi
               </div>
             </div>
           </motion.div>
@@ -73,7 +73,7 @@ const About = () => {
               <div className="absolute -bottom-6 -left-6 w-24 h-24 bg-slate-900 rounded-full opacity-5"></div>
               
               <div className="relative z-10">
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Mengapa Memilih HRIS Kami?</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">Mengapa Bermitra dengan Kami?</h3>
                 
                 <div className="space-y-6">
                   <div className="flex items-start space-x-4">
@@ -81,8 +81,8 @@ const About = () => {
                       <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
                     </div>
                     <div>
-                      <h4 className="font-semibold text-gray-900 mb-1">Keamanan Kelas Perusahaan</h4>
-                      <p className="text-gray-600 text-sm">Enkripsi tingkat militer dan kepatuhan terhadap standar keamanan internasional.</p>
+                      <h4 className="font-semibold text-gray-900 mb-1">Efisiensi Biaya</h4>
+                      <p className="text-gray-600 text-sm">Kurangi biaya operasional rekrutmen dan administrasi SDM secara signifikan.</p>
                     </div>
                   </div>
                   
@@ -91,8 +91,8 @@ const About = () => {
                       <div className="w-2 h-2 bg-green-600 rounded-full"></div>
                     </div>
                     <div>
-                      <h4 className="font-semibold text-gray-900 mb-1">Arsitektur Skalabel</h4>
-                      <p className="text-gray-600 text-sm">Dibangun untuk tumbuh bersama organisasi Anda, dari 100 hingga 10.000+ karyawan.</p>
+                      <h4 className="font-semibold text-gray-900 mb-1">Fleksibilitas Tenaga Kerja</h4>
+                      <p className="text-gray-600 text-sm">Sesuaikan jumlah tenaga kerja dengan kebutuhan bisnis Anda dengan cepat.</p>
                     </div>
                   </div>
                   

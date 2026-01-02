@@ -39,7 +39,7 @@ const Contact = () => {
     {
       icon: EnvelopeIcon,
       title: 'Email',
-      value: 'enterprise@hris.com',
+      value: 'ccc@outsourcingpro.com',
       description: 'Support and general inquiries'
     },
     {
@@ -51,7 +51,7 @@ const Contact = () => {
     {
       icon: BuildingOffice2Icon,
       title: 'Support',
-      value: 'help@hris.com',
+      value: 'help@ccc.com',
       description: '24/7 technical support'
     }
   ];
@@ -67,7 +67,7 @@ const Contact = () => {
             transition={{ duration: 0.6 }}
             className="text-4xl font-bold text-gray-900 mb-4"
           >
-            Siap Mengubah <span className="text-blue-900">Operasi HR Anda?</span>
+            Siap Memenuhi <span className="text-blue-900">Kebutuhan Tenaga Kerja Anda?</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 30 }}
@@ -76,7 +76,7 @@ const Contact = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-xl text-gray-600 max-w-3xl mx-auto"
           >
-            Hubungi tim solusi perusahaan kami untuk mengetahui bagaimana platform HRIS kami dapat merevolusi manajemen sumber daya manusia Anda.
+            Hubungi tim kami untuk mendiskusikan kebutuhan outsourcing atau karir Anda. Kami siap memberikan solusi terbaik.
           </motion.p>
         </div>
 
@@ -89,12 +89,12 @@ const Contact = () => {
             transition={{ duration: 0.6 }}
             className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100"
           >
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">Get in Touch</h3>
+            <h3 className="text-2xl font-bold text-gray-900 mb-6">Hubungi Kami</h3>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                    Full Name
+                    Nama Lengkap
                   </label>
                   <input
                     type="text"
@@ -135,7 +135,7 @@ const Contact = () => {
                   onChange={handleChange}
                   required
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                  placeholder="budi@perusahaan.com"
+                  placeholder="ccc@gmail.com"
                 />
               </div>
               <div>

@@ -31,7 +31,7 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.6 }}
             >
-              Transformasikan <span className="text-blue-900">Operasi HR Anda</span> dengan Keunggulan Perusahaan
+              Mitra <span className="text-blue-900">Outsourcing Terpercaya</span> untuk Pertumbuhan Bisnis
             </motion.h1>
             
             <motion.p
@@ -40,8 +40,8 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.6 }}
             >
-              Sederhanakan manajemen sumber daya manusia Anda dengan solusi HRIS komprehensif. 
-              Dirancang untuk organisasi tingkat perusahaan yang mengutamakan efisiensi, kepatuhan, dan wawasan strategis.
+              Kami menyediakan solusi tenaga kerja berkualitas tinggi, rekrutmen profesional, dan manajemen SDM yang efisien. 
+              Fokus pada bisnis inti Anda, biarkan kami mengelola kebutuhan tenaga kerja Anda.
             </motion.p>
 
             <motion.div
@@ -51,18 +51,18 @@ const Hero = () => {
               transition={{ delay: 0.6, duration: 0.6 }}
             >
               <Link
-                to="/attendance-login"
+                to="/job-postings"
                 className="px-8 py-4 bg-blue-900 text-white rounded-xl hover:bg-blue-800 transition-all duration-300 font-semibold text-lg flex items-center justify-center group shadow-lg hover:shadow-xl"
               >
-                Login
+                Cari Lowongan
                 <ArrowRightIcon className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-200" />
               </Link>
-              <a
-                href="#features"
+              <Link
+                to="/attendance-login"
                 className="px-8 py-4 border-2 border-blue-900 text-blue-900 rounded-xl hover:bg-blue-900 hover:text-white transition-all duration-300 font-semibold text-lg"
               >
-                Pelajari Lebih Lanjut
-              </a>
+                Login Karyawan
+              </Link>
             </motion.div>
 
             {/* Trust indicators */}
@@ -73,16 +73,16 @@ const Hero = () => {
               transition={{ delay: 0.8, duration: 0.6 }}
             >
               <div className="text-center">
-                <div className="text-2xl font-bold text-blue-900">500+</div>
-                <div className="text-sm text-gray-600">Klien Perusahaan</div>
+                <div className="text-2xl font-bold text-blue-900">1000+</div>
+                <div className="text-sm text-gray-600">Tenaga Kerja</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-blue-900">99.9%</div>
-                <div className="text-sm text-gray-600">Uptime</div>
+                <div className="text-2xl font-bold text-blue-900">50+</div>
+                <div className="text-sm text-gray-600">Mitra Perusahaan</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-blue-900">24/7</div>
-                <div className="text-sm text-gray-600">Dukungan</div>
+                <div className="text-sm text-gray-600">Layanan</div>
               </div>
             </motion.div>
           </motion.div>

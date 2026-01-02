@@ -67,12 +67,12 @@ const Footer = () => {
           <div className="lg:col-span-2">
             <div className="flex items-center space-x-3 mb-6">
               <div className="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center">
-                <span className="text-white font-bold text-xl">HR</span>
+                <span className="text-white font-bold text-xl">OS</span>
               </div>
-              <span className="text-xl font-bold">HRIS Perusahaan</span>
+              <span className="text-xl font-bold">Outsourcing Pro</span>
             </div>
             <p className="text-gray-400 mb-6 leading-relaxed">
-              Mengubah manajemen sumber daya manusia dengan teknologi mutakhir dan solusi kelas perusahaan untuk organisasi modern.
+              Mitra strategis dalam penyediaan tenaga kerja berkualitas dan solusi manajemen SDM yang efisien untuk mendukung pertumbuhan bisnis Anda.
             </p>
             <div className="flex space-x-4">
               <a href="#" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors duration-200">
@@ -158,7 +158,7 @@ const Footer = () => {
         {/* Bottom Section */}
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm mb-4 md:mb-0">
-            © {currentYear} HRIS Perusahaan. Hak cipta dilindungi.
+            © {currentYear} Outsourcing Pro. Hak cipta dilindungi.
           </p>
           <div className="flex items-center space-x-6 text-sm text-gray-400">
             <span className="flex items-center">

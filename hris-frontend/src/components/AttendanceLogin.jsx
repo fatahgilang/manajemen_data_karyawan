@@ -44,7 +44,7 @@ const AttendanceLogin = () => {
 
   return (
     <div className="max-w-md mx-auto py-16 px-6">
-      <h1 className="text-2xl font-bold mb-6">Login Absensi Karyawan</h1>
+      <h1 className="text-2xl font-bold mb-6">Login Portal Karyawan</h1>
       <form onSubmit={handleLogin} className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-gray-700">ID Karyawan</label>
@@ -53,7 +53,7 @@ const AttendanceLogin = () => {
             value={employeeId}
             onChange={(e) => setEmployeeId(e.target.value)}
             className="mt-1 w-full border rounded px-3 py-2"
-            placeholder="Misal: EMP-20251227-0001"
+            placeholder="Misal: EMP26010001"
           />
         </div>
         <div>
@@ -80,7 +80,7 @@ const AttendanceLogin = () => {
       )}
 
       <div className="mt-6 text-sm text-gray-500">
-        Lupa atau belum punya password? Hubungi admin HR untuk set/reset.
+        Hubungi admin untuk reset password.
       </div>
     </div>
   );
