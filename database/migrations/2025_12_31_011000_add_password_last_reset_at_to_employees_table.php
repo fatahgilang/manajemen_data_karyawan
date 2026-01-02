@@ -8,7 +8,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('employees', function (Blueprint $table) {
-            $table->timestamp('password_last_reset_at')->nullable()->after('password_plaintext_encrypted');
+            $table->timestamp('password_last_reset_at')->nullable()->after('password');
         });
     }
 

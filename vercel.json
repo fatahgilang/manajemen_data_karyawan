@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "name": "hris-project",
+  "builds": [
+    {
+      "src": "public/index.php",
+      "use": "@vercel/php",
+      "config": {
+        "runtime": "php-8.3"
+      }
+    },
+    {
+      "src": "hris-frontend/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/public/index.php"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/public/index.php",
+      "check": true
+    }
+  ]
+}
