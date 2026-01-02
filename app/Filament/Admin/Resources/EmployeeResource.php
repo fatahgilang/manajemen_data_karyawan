@@ -37,9 +37,11 @@ protected static ?string $navigationGroup = 'Kepegawaian';
         return $form
             ->schema([
                 Forms\Components\TextInput::make('id')
-                    ->required()
+                    ->disabled()
+                    ->dehydrated()
                     ->maxLength(255)
-                    ->label('ID Karyawan'),
+                    ->label('ID Karyawan')
+                    ->placeholder('Otomatis dibuat sistem'),
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255)

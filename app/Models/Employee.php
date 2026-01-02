@@ -25,6 +25,30 @@ class Employee extends Model
     protected $keyType = 'string';
     public $incrementing = false;
 
+    protected static function booted()
+    {
+        static::creating(function ($employee) {
+            if (empty($employee->id)) {
+                $yearMonth = date('ym'); // 2501
+                $prefix = 'EMP' . $yearMonth;
+                
+                // Find the last ID with this prefix
+                $lastEmployee = self::where('id', 'like', $prefix . '%')
+                    ->orderBy('id', 'desc')
+                    ->first();
+
+                if ($lastEmployee) {
+                    $lastSequence = intval(substr($lastEmployee->id, -4));
+                    $newSequence = $lastSequence + 1;
+                } else {
+                    $newSequence = 1;
+                }
+
+                $employee->id = $prefix . str_pad($newSequence, 4, '0', STR_PAD_LEFT);
+            }
+        });
+    }
+
     protected $fillable = [
         'id',
         'name',

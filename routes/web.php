@@ -47,20 +47,3 @@ Route::get('/assets/{file}', function ($file) {
     
     abort(404);
 });
-
-// Fallback route for React Router
-Route::get('/{any}', function () {
-    $frontendPath = base_path('hris-frontend/dist/index.html');
-    
-    if (file_exists($frontendPath)) {
-        return response()->make(
-            file_get_contents($frontendPath),
-            200,
-            ['Content-Type' => 'text/html']
-        );
-    }
-    
-    return view('welcome');
-})->where('any', '.*')->missing(function () {
-    return view('welcome');
-});

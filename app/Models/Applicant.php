@@ -34,40 +34,54 @@ class Applicant extends Model
     protected static function booted()
     {
         static::updated(function ($applicant) {
-            if ($applicant->wasChanged('status') && $applicant->status === 'Hired' && !$applicant->employee_id) {
-                $plainPassword = Str::random(10);
+            try {
+                if ($applicant->wasChanged('status') && $applicant->status === 'Hired' && !$applicant->employee_id) {
+                    $plainPassword = Str::random(10);
 
-                // Ensure department & position exist; create defaults if missing
-                $departmentId = Department::query()->value('id');
-                if (!$departmentId) {
-                    $departmentId = Department::query()->create(['name' => 'General'])->id;
+                    // Check if employee with this email already exists
+                    $existingEmployee = Employee::where('email', $applicant->email)->first();
+                    if ($existingEmployee) {
+                        $applicant->employee_id = $existingEmployee->id;
+                        $applicant->saveQuietly();
+                        return;
+                    }
+
+                    // Ensure department & position exist; create defaults if missing
+                    $departmentId = Department::query()->value('id');
+                    if (!$departmentId) {
+                        $departmentId = Department::query()->create(['name' => 'General'])->id;
+                    }
+                    $positionId = Position::query()->value('id');
+                    if (!$positionId) {
+                        $positionId = Position::query()->create(['title' => 'Staff', 'base_salary' => 0])->id;
+                    }
+
+                    // Generate unique Employee primary key (string id)
+                    do {
+                        $empId = 'EMP-' . now()->format('Ymd') . '-' . str_pad((string) random_int(0, 9999), 4, '0', STR_PAD_LEFT);
+                    } while (Employee::where('id', $empId)->exists());
+
+                    $employee = Employee::create([
+                        'id' => $empId,
+                        'name' => $applicant->full_name,
+                        'email' => $applicant->email,
+                        'department_id' => $departmentId,
+                        'position_id' => $positionId,
+                        'join_date' => now()->toDateString(),
+                        'phone_number' => $applicant->phone_number,
+                        'password' => $plainPassword,
+                        'password_plaintext_encrypted' => Crypt::encryptString($plainPassword),
+                    ]);
+
+                    $applicant->employee_id = $employee->id;
+                    $applicant->saveQuietly();
+
+                    // TODO: kirim password awal secara aman ke karyawan/admin
                 }
-                $positionId = Position::query()->value('id');
-                if (!$positionId) {
-                    $positionId = Position::query()->create(['title' => 'Staff', 'base_salary' => 0])->id;
-                }
-
-                // Generate unique Employee primary key (string id)
-                do {
-                    $empId = 'EMP-' . now()->format('Ymd') . '-' . str_pad((string) random_int(0, 9999), 4, '0', STR_PAD_LEFT);
-                } while (Employee::where('id', $empId)->exists());
-
-                $employee = Employee::create([
-                    'id' => $empId,
-                    'name' => $applicant->full_name,
-                    'email' => $applicant->email,
-                    'department_id' => $departmentId,
-                    'position_id' => $positionId,
-                    'join_date' => now()->toDateString(),
-                    'phone_number' => $applicant->phone_number,
-                    'password' => $plainPassword,
-                    'password_plaintext_encrypted' => Crypt::encryptString($plainPassword),
-                ]);
-
-                $applicant->employee_id = $employee->id;
-                $applicant->save();
-
-                // TODO: kirim password awal secara aman ke karyawan/admin
+            } catch (\Exception $e) {
+                \Illuminate\Support\Facades\Log::error('Error creating employee for applicant: ' . $e->getMessage());
+                \Illuminate\Support\Facades\Log::error($e->getTraceAsString());
+                throw $e;
             }
         });
     }
