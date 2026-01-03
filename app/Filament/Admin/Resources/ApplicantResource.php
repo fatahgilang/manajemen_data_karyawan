@@ -16,7 +16,7 @@ use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\ImageColumn;
 use Illuminate\Support\Facades\Storage;
-use Filament\Tables\Actions\LinkAction;
+use Filament\Tables\Actions\Action;
 
 class ApplicantResource extends Resource
 {
@@ -166,7 +166,7 @@ class ApplicantResource extends Resource
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
-                LinkAction::make('whatsapp')
+                Tables\Actions\Action::make('whatsapp')
                     ->label('Hubungi WhatsApp')
                     ->icon('heroicon-o-phone')
                     ->color('success')
@@ -180,7 +180,7 @@ class ApplicantResource extends Resource
                     ->requiresConfirmation()
                     ->visible(fn ($record) => $record && $record->status !== 'Hired')
                     ->action(fn ($record) => $record->update(['status' => 'Hired'])),
-                LinkAction::make('viewEmployee')
+                Tables\Actions\Action::make('viewEmployee')
                     ->label('Lihat Karyawan')
                     ->icon('heroicon-o-user')
                     ->color('primary')
