@@ -1,5 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+const MotionHeader = motion.header;
+const MotionDiv = motion.div;
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
@@ -12,26 +14,24 @@ const Header = ({ isScrolled }) => {
   const isLoggedIn = !!localStorage.getItem('token');
   const navItems = isLoggedIn
     ? [
-        { name: 'Beranda', path: '/' },
-        { name: 'Layanan', path: '/#features' },
-        { name: 'Tentang Kami', path: '/#about' },
-        { name: 'Kontak', path: '/#contact' },
-        { name: 'Karir', path: '/job-postings' },
-        { name: 'Absensi', path: '/attendance' },
-        // Tambahan menu
-        { name: 'Dokumen', path: '/documents' },
-        { name: 'Persetujuan', path: '/approvals' },
-      ]
+      { name: 'Beranda', path: '/' },
+      { name: 'Layanan', path: '/#features' },
+      { name: 'Tentang Kami', path: '/#about' },
+      { name: 'Kontak', path: '/#contact' },
+      { name: 'Karir', path: '/job-postings' },
+      { name: 'Absensi', path: '/attendance' },
+      // Tambahan menu
+      { name: 'Dokumen', path: '/documents' },
+      { name: 'Persetujuan', path: '/approvals' },
+      { name: 'Shifts', path: '/shifts' },
+      { name: 'Roster', path: '/roster' },
+    ]
     : [
-        { name: 'Beranda', path: '/' },
-        { name: 'Layanan', path: '/#features' },
-        { name: 'Tentang Kami', path: '/#about' },
-        { name: 'Kontak', path: '/#contact' },
-        { name: 'Lowongan', path: '/job-postings' },
-        // Tambahan menu
-        { name: 'Dokumen', path: '/documents' },
-        { name: 'Persetujuan', path: '/approvals' },
-      ];
+      { name: 'Beranda', path: '/' },
+      { name: 'Layanan', path: '/#features' },
+      { name: 'Tentang Kami', path: '/#about' },
+      { name: 'Kontak', path: '/#contact' },
+    ];
 
   const handleNavClick = (e, item) => {
     // Handle hash navigation for homepage sections using Router
@@ -43,8 +43,6 @@ const Header = ({ isScrolled }) => {
         const el = document.getElementById(sectionId);
         if (el) {
           el.scrollIntoView({ behavior: 'smooth' });
-        } else {
-          window.location.hash = `#${sectionId}`;
         }
       } else {
         // Navigate via Router without full reload, then scroll programmatically
@@ -71,7 +69,7 @@ const Header = ({ isScrolled }) => {
   };
 
   return (
-    <motion.header
+    <MotionHeader
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className={`fixed w-full z-50 transition-all duration-300 ${
@@ -141,7 +139,7 @@ const Header = ({ isScrolled }) => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             className="md:hidden mt-4 py-4 border-t border-gray-200"
@@ -174,10 +172,10 @@ const Header = ({ isScrolled }) => {
                 </Link>
               )}
             </div>
-          </motion.div>
+          </MotionDiv>
         )}
       </div>
-    </motion.header>
+    </MotionHeader>
   );
 };
 

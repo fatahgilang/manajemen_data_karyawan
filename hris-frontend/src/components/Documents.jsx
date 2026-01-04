@@ -33,7 +33,7 @@ function Documents() {
     try {
       const res = await listDocuments();
       setDocs(res.data.data || []);
-    } catch (e) {
+    } catch {
       setError('Gagal memuat dokumen');
     } finally {
       setLoading(false);
@@ -48,7 +48,7 @@ function Documents() {
       ]);
       setDepartments(depRes.data.data || depRes.data || []);
       setEmployees(empRes.data.data || empRes.data || []);
-    } catch (e) {
+    } catch {
       // Biarkan kosong jika gagal, pengguna tetap bisa input manual
     }
   };

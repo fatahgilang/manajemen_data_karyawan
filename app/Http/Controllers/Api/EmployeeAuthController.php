@@ -13,18 +13,18 @@ class EmployeeAuthController extends Controller
     public function login(Request $request)
     {
         $validated = $request->validate([
-            'employee_id' => ['required', 'string'],
+            'email' => ['required', 'email'],
             'password' => ['required', 'string'],
         ]);
 
-        $employee = Employee::where('id', $validated['employee_id'])->first();
+        $employee = Employee::where('email', $validated['email'])->first();
 
         if (!$employee) {
-            return response()->json(['message' => 'ID karyawan tidak ditemukan'], 422);
+            return response()->json(['message' => 'Email atau password salah'], 422);
         }
 
         if (!$employee->password || !Hash::check($validated['password'], $employee->password)) {
-            return response()->json(['message' => 'ID karyawan atau password salah'], 422);
+            return response()->json(['message' => 'Email atau password salah'], 422);
         }
 
         // Generate token sederhana; simpan di kolom api_token

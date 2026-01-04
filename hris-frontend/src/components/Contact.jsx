@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+const MotionH2 = motion.h2;
+const MotionP = motion.p;
+const MotionDiv = motion.div;
 import { 
   PhoneIcon, 
   EnvelopeIcon, 
@@ -60,7 +63,7 @@ const Contact = () => {
     <section id="contact" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <motion.h2
+          <MotionH2
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -68,8 +71,8 @@ const Contact = () => {
             className="text-4xl font-bold text-gray-900 mb-4"
           >
             Siap Memenuhi <span className="text-blue-900">Kebutuhan Tenaga Kerja Anda?</span>
-          </motion.h2>
-          <motion.p
+          </MotionH2>
+          <MotionP
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -77,12 +80,12 @@ const Contact = () => {
             className="text-xl text-gray-600 max-w-3xl mx-auto"
           >
             Hubungi tim kami untuk mendiskusikan kebutuhan outsourcing atau karir Anda. Kami siap memberikan solusi terbaik.
-          </motion.p>
+          </MotionP>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-16">
           {/* Contact Form */}
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -160,10 +163,10 @@ const Contact = () => {
                 Kirim Pesan
               </button>
             </form>
-          </motion.div>
+          </MotionDiv>
 
           {/* Contact Information */}
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -205,7 +208,7 @@ const Contact = () => {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </MotionDiv>
         </div>
       </div>
     </section>

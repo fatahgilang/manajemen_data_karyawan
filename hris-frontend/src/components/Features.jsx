@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+const MotionDiv = motion.div;
 import { 
   UserGroupIcon, 
   CurrencyDollarIcon, 
@@ -53,7 +54,7 @@ const Features = () => {
     <section id="features" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -67,12 +68,12 @@ const Features = () => {
             Kami menawarkan berbagai layanan outsourcing yang dirancang untuk meningkatkan efisiensi operasional 
             dan mengurangi beban administratif perusahaan Anda.
           </p>
-        </motion.div>
+        </MotionDiv>
 
         {/* Features Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
-            <motion.div
+            <MotionDiv
               key={index}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -85,12 +86,12 @@ const Features = () => {
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-4">{feature.title}</h3>
               <p className="text-gray-600 leading-relaxed">{feature.description}</p>
-            </motion.div>
+            </MotionDiv>
           ))}
         </div>
 
         {/* Additional Benefits */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -111,7 +112,7 @@ const Features = () => {
               <div className="text-blue-200">Keamanan Bersertifikat</div>
             </div>
           </div>
-        </motion.div>
+        </MotionDiv>
       </div>
     </section>
   );

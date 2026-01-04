@@ -3,7 +3,7 @@ import api from '../api';
 import { useNavigate } from 'react-router-dom';
 
 const AttendanceLogin = () => {
-  const [employeeId, setEmployeeId] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
@@ -13,17 +13,14 @@ const AttendanceLogin = () => {
     e.preventDefault();
     setMessage('');
 
-    if (!employeeId || !password) {
-      setMessage('Masukkan ID Karyawan dan Password.');
+    if (!email || !password) {
+      setMessage('Masukkan Email dan Password.');
       return;
     }
 
     try {
       setLoading(true);
-      const res = await api.post('/employee/login', {
-        employee_id: employeeId,
-        password,
-      });
+      const res = await api.post('/employee/login', { email, password });
 
       const { token, employee_id } = res.data;
       if (token && employee_id) {
@@ -44,16 +41,16 @@ const AttendanceLogin = () => {
 
   return (
     <div className="max-w-md mx-auto py-16 px-6">
-      <h1 className="text-2xl font-bold mb-6">Login Portal Karyawan</h1>
+      <h1 className="text-2xl font-bold mb-6">Login Karyawan</h1>
       <form onSubmit={handleLogin} className="space-y-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700">ID Karyawan</label>
+          <label className="block text-sm font-medium text-gray-700">Email</label>
           <input
-            type="text"
-            value={employeeId}
-            onChange={(e) => setEmployeeId(e.target.value)}
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             className="mt-1 w-full border rounded px-3 py-2"
-            placeholder="Misal: EMP26010001"
+            placeholder="Misal: email@perusahaan.com"
           />
         </div>
         <div>

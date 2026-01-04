@@ -23,7 +23,6 @@ function Approvals() {
     { approver_type: 'role', approver_role: 'hr' },
   ]);
   const [isHrOrAdmin, setIsHrOrAdmin] = useState(false);
-  const [showAdvancedJSON, setShowAdvancedJSON] = useState(false);
 
   const [ruleForm, setRuleForm] = useState({ department_id: '', type: 'cuti' });
   const [reqForm, setReqForm] = useState({ type: 'cuti', requester_employee_id: '', department_id: '', start_date: '', end_date: '', date: '', reason: '' });
@@ -65,7 +64,7 @@ function Approvals() {
       } else {
         setIsHrOrAdmin(false);
       }
-    } catch (_) {
+    } catch {
       setIsHrOrAdmin(false);
     }
   };
@@ -80,10 +79,10 @@ function Approvals() {
     try {
       const parsed = JSON.parse(ruleForm.steps_json_text || '[]');
       setRuleSteps(Array.isArray(parsed) ? parsed : []);
-    } catch (_) {
+    } catch {
       setRuleSteps([{ approver_type: 'role', approver_role: 'manager' }]);
     }
-  }, []);
+  }, [ruleForm.steps_json_text]);
 
   // Sinkronisasi builder ke teks JSON agar backend tetap menerima format lama
   useEffect(() => {
@@ -166,7 +165,7 @@ function Approvals() {
     try {
       await approveRequest(id);
       await fetchData();
-    } catch (e) {
+    } catch {
       setError('Gagal approve');
     } finally {
       setLoading(false);
@@ -179,7 +178,7 @@ function Approvals() {
     try {
       await rejectRequest(id);
       await fetchData();
-    } catch (e) {
+    } catch {
       setError('Gagal reject');
     } finally {
       setLoading(false);

@@ -37,4 +37,17 @@ export const rejectRequest = (id, payload = {}) => api.post(`/approvals/requests
 export const listDepartments = (params) => api.get('/departments', { params });
 export const listEmployees = (params) => api.get('/employees', { params });
 
+// ===== Shifts & Roster =====
+export const listShifts = () => api.get('/shifts');
+export const createShift = (payload) => api.post('/shifts', payload);
+export const updateShift = (id, payload) => api.put(`/shifts/${id}`, payload);
+export const deleteShift = (id) => api.delete(`/shifts/${id}`);
+
+export const listSchedules = (params) => api.get('/roster/schedules', { params });
+export const generateRoster = (payload) => api.post('/roster/generate', payload);
+export const requestShiftSwap = (payload) => api.post('/roster/swap', payload);
+export const listShiftSwaps = (params) => api.get('/roster/swaps', { params });
+export const approveShiftSwap = (id) => api.post(`/roster/swap/${id}/approve`);
+export const rejectShiftSwap = (id) => api.post(`/roster/swap/${id}/reject`);
+
 export default api;

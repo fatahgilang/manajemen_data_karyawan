@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { 
   EnvelopeIcon,
   PhoneIcon,
@@ -47,8 +46,6 @@ const Footer = () => {
         const el = document.getElementById(sectionId);
         if (el) {
           el.scrollIntoView({ behavior: 'smooth' });
-        } else {
-          window.location.hash = `#${sectionId}`;
         }
       } else {
         // Navigate to home via Router, then scroll programatically

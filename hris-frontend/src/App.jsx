@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate, Navigate } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Hero from './components/Hero';
@@ -14,6 +14,17 @@ import Attendance from './components/Attendance';
 import AttendanceLogin from './components/AttendanceLogin';
 import Documents from './components/Documents';
 import Approvals from './components/Approvals';
+import Shifts from './components/Shifts';
+import Roster from './components/Roster';
+
+const RequireAuth = ({ children }) => {
+  const location = useLocation();
+  const token = localStorage.getItem('token');
+  if (!token) {
+    return <Navigate to="/attendance-login" replace state={{ from: location.pathname }} />;
+  }
+  return children;
+};
 
 const ScrollAwareLayout = () => {
   const location = useLocation();
@@ -32,8 +43,6 @@ const ScrollAwareLayout = () => {
       const id = location.state.scrollTo;
       // Ensure sections are mounted before scrolling
       setTimeout(() => {
-        // Update hash for consistency/active state
-        window.location.hash = `#${id}`;
         const el = document.getElementById(id);
         if (el) {
           el.scrollIntoView({ behavior: 'smooth' });
@@ -63,10 +72,12 @@ const ScrollAwareLayout = () => {
           <Route path="/attendance-login" element={<AttendanceLogin />} />
           <Route path="/departments" element={<Departments />} />
           <Route path="/positions" element={<Positions />} />
-          <Route path="/job-postings" element={<JobPostings />} />
-          <Route path="/attendance" element={<Attendance />} />
-          <Route path="/documents" element={<Documents />} />
-          <Route path="/approvals" element={<Approvals />} />
+          <Route path="/job-postings" element={<RequireAuth><JobPostings /></RequireAuth>} />
+          <Route path="/attendance" element={<RequireAuth><Attendance /></RequireAuth>} />
+          <Route path="/documents" element={<RequireAuth><Documents /></RequireAuth>} />
+          <Route path="/approvals" element={<RequireAuth><Approvals /></RequireAuth>} />
+          <Route path="/shifts" element={<RequireAuth><Shifts /></RequireAuth>} />
+          <Route path="/roster" element={<RequireAuth><Roster /></RequireAuth>} />
         </Routes>
       </main>
       <Footer />

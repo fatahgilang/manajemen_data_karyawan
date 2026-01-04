@@ -2,13 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import api, { backendOrigin } from '../api';
 
 export default function Attendance() {
-  const [employeeId, setEmployeeId] = useState('');
   const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [lastCoords, setLastCoords] = useState(null);
-  const [locStatus, setLocStatus] = useState('');
 
   // Kamera
   const videoRef = useRef(null);
@@ -19,19 +16,13 @@ export default function Attendance() {
   useEffect(() => {
     const token = localStorage.getItem('token');
     setIsLoggedIn(!!token);
-    const storedEmployeeId = localStorage.getItem('employee_id');
-    if (storedEmployeeId) {
-      setEmployeeId(storedEmployeeId);
-    }
   }, []);
 
   const fetchStatus = async () => {
     setLoading(true);
     setMessage('');
     try {
-      const res = await api.get('/attendances/status', {
-        params: { employee_id: employeeId },
-      });
+      const res = await api.get('/attendances/status');
       setStatus(res.data.attendance);
     } catch (err) {
       setMessage(err.response?.data?.message || err.message || 'Gagal mengambil status');
@@ -51,7 +42,7 @@ export default function Attendance() {
         setCameraActive(true);
         setPhotoBlob(null);
       }
-    } catch (e) {
+    } catch {
       setMessage('Tidak bisa mengakses kamera. Beri izin kamera di browser.');
     }
   };
@@ -97,7 +88,6 @@ export default function Attendance() {
       }
       const blob = await capturePhoto();
       const form = new FormData();
-      form.append('employee_id', employeeId);
       form.append('photo', blob, 'check-in.jpg');
       const res = await api.post('/attendances/check-in', form);
       setStatus(res.data.attendance);
@@ -118,7 +108,6 @@ export default function Attendance() {
       }
       const blob = await capturePhoto();
       const form = new FormData();
-      form.append('employee_id', employeeId);
       form.append('photo', blob, 'check-out.jpg');
       const res = await api.post('/attendances/check-out', form);
       setStatus(res.data.attendance);
@@ -136,17 +125,6 @@ export default function Attendance() {
         <h2 className="text-2xl font-bold text-gray-800 mb-6">Absensi Kamera</h2>
 
         <div className="bg-white shadow rounded p-6">
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-1">ID Karyawan</label>
-            <input
-              type="text"
-              value={employeeId}
-              onChange={(e) => setEmployeeId(e.target.value)}
-              className="w-full border border-gray-300 rounded px-3 py-2"
-              placeholder="Masukkan ID karyawan"
-            />
-          </div>
-
           <div className="mb-4">
             <div className="flex items-center gap-3">
               <button
@@ -191,21 +169,21 @@ export default function Attendance() {
           <div className="flex gap-3 mb-4">
             <button
               onClick={fetchStatus}
-              disabled={!employeeId || !isLoggedIn || loading}
+              disabled={!isLoggedIn || loading}
               className="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 disabled:opacity-50"
             >
               Cek Status
             </button>
             <button
               onClick={checkIn}
-              disabled={!employeeId || !isLoggedIn || loading}
+              disabled={!isLoggedIn || loading}
               className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 disabled:opacity-50"
             >
               Absen Masuk (Foto)
             </button>
             <button
               onClick={checkOut}
-              disabled={!employeeId || !isLoggedIn || loading}
+              disabled={!isLoggedIn || loading}
               className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 disabled:opacity-50"
             >
               Absen Keluar (Foto)
