@@ -13,7 +13,6 @@ import JobPostings from './components/JobPostings';
 import Attendance from './components/Attendance';
 import AttendanceLogin from './components/AttendanceLogin';
 import Documents from './components/Documents';
-import Approvals from './components/Approvals';
 import Shifts from './components/Shifts';
 import Roster from './components/Roster';
 
@@ -75,7 +74,6 @@ const ScrollAwareLayout = () => {
           <Route path="/job-postings" element={<RequireAuth><JobPostings /></RequireAuth>} />
           <Route path="/attendance" element={<RequireAuth><Attendance /></RequireAuth>} />
           <Route path="/documents" element={<RequireAuth><Documents /></RequireAuth>} />
-          <Route path="/approvals" element={<RequireAuth><Approvals /></RequireAuth>} />
           <Route path="/shifts" element={<RequireAuth><Shifts /></RequireAuth>} />
           <Route path="/roster" element={<RequireAuth><Roster /></RequireAuth>} />
         </Routes>

@@ -22,7 +22,6 @@ const Header = ({ isScrolled }) => {
       { name: 'Absensi', path: '/attendance' },
       // Tambahan menu
       { name: 'Dokumen', path: '/documents' },
-      { name: 'Persetujuan', path: '/approvals' },
       { name: 'Shifts', path: '/shifts' },
       { name: 'Roster', path: '/roster' },
     ]
@@ -73,8 +72,8 @@ const Header = ({ isScrolled }) => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-white/90 backdrop-blur-sm shadow-md py-2' 
+        isScrolled
+          ? 'bg-white/90 backdrop-blur-sm shadow-md py-2'
           : 'bg-transparent py-4'
       }`}
     >

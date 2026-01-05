@@ -25,13 +25,6 @@ export const createDocument = (formData) => api.post('/documents', formData, { h
 export const addDocumentVersion = (documentId, formData) => api.post(`/documents/${documentId}/versions`, formData, { headers: { 'Content-Type': 'multipart/form-data' } });
 export const downloadDocumentVersionUrl = (documentId, versionId) => `${backendOrigin}/api/documents/${documentId}/versions/${versionId}/download`;
 
-// ===== Approvals API =====
-export const listApprovalRules = (params) => api.get('/approvals/rules', { params });
-export const upsertApprovalRule = (payload) => api.post('/approvals/rules', payload);
-export const listApprovalRequests = (params) => api.get('/approvals/requests', { params });
-export const createApprovalRequest = (payload) => api.post('/approvals/requests', payload);
-export const approveRequest = (id, payload = {}) => api.post(`/approvals/requests/${id}/approve`, payload);
-export const rejectRequest = (id, payload = {}) => api.post(`/approvals/requests/${id}/reject`, payload);
 
 // ===== Master Data (Departments, Employees) =====
 export const listDepartments = (params) => api.get('/departments', { params });
