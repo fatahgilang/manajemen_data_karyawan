@@ -23,7 +23,26 @@ class EmployeeAuthController extends Controller
             return response()->json(['message' => 'Email atau password salah'], 422);
         }
 
-        if (!$employee->password || !Hash::check($validated['password'], $employee->password)) {
+        $isValid = false;
+        if ($employee->password) {
+            try {
+                $isValid = Hash::check($validated['password'], $employee->password);
+            } catch (\RuntimeException $e) {
+                $isValid = false; // Stored hash not in bcrypt format
+            }
+
+            // Fallback: legacy plain-text password stored in DB
+            if (!$isValid && !str_starts_with((string)$employee->password, '$2y$')) {
+                if (hash_equals((string)$employee->password, (string)$validated['password'])) {
+                    // Rehash to bcrypt via Eloquent 'hashed' cast on assignment
+                    $employee->password = $validated['password'];
+                    $employee->save();
+                    $isValid = true;
+                }
+            }
+        }
+
+        if (!$isValid) {
             return response()->json(['message' => 'Email atau password salah'], 422);
         }
 

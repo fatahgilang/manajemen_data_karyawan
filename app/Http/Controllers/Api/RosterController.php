@@ -164,4 +164,26 @@ class RosterController extends Controller
 
         return response()->json(['message' => 'Swap rejected']);
     }
+
+    public function setSchedule(Request $request)
+    {
+        $data = $request->validate([
+            'employee_id' => 'required|exists:employees,id',
+            'date' => 'required|date',
+            'shift_id' => 'required|exists:shifts,id',
+        ]);
+
+        $schedule = ShiftSchedule::updateOrCreate(
+            [
+                'employee_id' => $data['employee_id'],
+                'date' => $data['date'],
+            ],
+            [
+                'shift_id' => $data['shift_id'],
+                'status' => 'assigned',
+            ]
+        );
+
+        return response()->json($schedule);
+    }
 }

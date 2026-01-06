@@ -12,6 +12,8 @@ const Header = ({ isScrolled }) => {
   const navigate = useNavigate();
 
   const isLoggedIn = !!localStorage.getItem('token');
+  const role = (localStorage.getItem('role') || '').toLowerCase();
+  const isHrd = role === 'hrd' || role === 'super_admin';
   const navItems = isLoggedIn
     ? [
       { name: 'Beranda', path: '/' },
@@ -20,10 +22,8 @@ const Header = ({ isScrolled }) => {
       { name: 'Kontak', path: '/#contact' },
       { name: 'Karir', path: '/job-postings' },
       { name: 'Absensi', path: '/attendance' },
-      // Tambahan menu
-      { name: 'Dokumen', path: '/documents' },
-      { name: 'Shifts', path: '/shifts' },
-      { name: 'Roster', path: '/roster' },
+      // Tambahan menu (HR-only items will be added later)
+      ...(isHrd ? [{ name: 'Dokumen HR', path: '/hr-documents' }] : []),
     ]
     : [
       { name: 'Beranda', path: '/' },

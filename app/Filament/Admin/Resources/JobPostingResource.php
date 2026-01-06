@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\ViewAction;
+use Illuminate\Support\Facades\Auth;
 
 class JobPostingResource extends Resource
 {
@@ -111,5 +112,26 @@ protected static ?string $navigationGroup = 'Rekrutmen';
             'create' => Pages\CreateJobPosting::route('/create'),
             'edit' => Pages\EditJobPosting::route('/{record}/edit'),
         ];
+    }
+
+    public static function canViewAny(): bool
+    {
+        $role = strtolower((string) (Auth::user()->role ?? ''));
+        return in_array($role, ['super_admin', 'hrd', 'admin'], true);
+    }
+
+    public static function canCreate(): bool
+    {
+        return static::canViewAny();
+    }
+
+    public static function canEdit($record): bool
+    {
+        return static::canViewAny();
+    }
+
+    public static function canDelete($record): bool
+    {
+        return static::canViewAny();
     }
 }

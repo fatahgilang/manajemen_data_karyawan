@@ -29,11 +29,12 @@ class User extends Authenticatable implements FilamentUser
      *
      * @var list<string>
      */
-    
+
     protected $fillable = [
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -57,5 +58,20 @@ class User extends Authenticatable implements FilamentUser
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Ensure returned auth password is a valid bcrypt hash.
+     * If a legacy/plaintext value is detected, rehash and persist it.
+     */
+    public function getAuthPassword()
+    {
+        $pass = (string) ($this->attributes['password'] ?? '');
+        if ($pass !== '' && !str_starts_with($pass, '$2y$')) {
+            $this->password = $pass; // triggers 'hashed' cast
+            $this->save();
+            $pass = (string) ($this->attributes['password'] ?? $pass);
+        }
+        return $pass;
     }
 }

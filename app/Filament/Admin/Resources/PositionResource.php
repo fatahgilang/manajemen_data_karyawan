@@ -16,6 +16,7 @@ use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\ForceDeleteBulkAction;
 use Filament\Tables\Actions\RestoreBulkAction;
 use Filament\Tables\Filters\TrashedFilter;
+use Illuminate\Support\Facades\Auth;
 
 class PositionResource extends Resource
 {
@@ -93,5 +94,26 @@ class PositionResource extends Resource
             'create' => Pages\CreatePosition::route('/create'),
             'edit' => Pages\EditPosition::route('/{record}/edit'),
         ];
+    }
+
+    public static function canViewAny(): bool
+    {
+        $role = strtolower((string) (Auth::user()->role ?? ''));
+        return in_array($role, ['super_admin', 'hrd'], true);
+    }
+
+    public static function canCreate(): bool
+    {
+        return static::canViewAny();
+    }
+
+    public static function canEdit($record): bool
+    {
+        return static::canViewAny();
+    }
+
+    public static function canDelete($record): bool
+    {
+        return static::canViewAny();
     }
 }

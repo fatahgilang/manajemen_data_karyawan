@@ -1,17 +1,11 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { listEmployees, listShifts, listSchedules, generateRoster, requestShiftSwap, listShiftSwaps, approveShiftSwap, rejectShiftSwap } from '../api';
+import { listEmployees, listShifts, setSchedule, requestShiftSwap, listShiftSwaps, approveShiftSwap, rejectShiftSwap } from '../api';
 
 const Roster = () => {
   const [employees, setEmployees] = useState([]);
-  const [shifts, setShifts] = useState([]);
-  const [selectedEmployees, setSelectedEmployees] = useState([]);
-  const [startDate, setStartDate] = useState('');
-  const [days, setDays] = useState(14);
-  const [patternIds, setPatternIds] = useState('');
-  const [rotation, setRotation] = useState('daily');
   const [message, setMessage] = useState('');
-  const [range, setRange] = useState({ start: '', end: '' });
-  const [schedules, setSchedules] = useState([]);
+  const [shifts, setShifts] = useState([]);
+  const [scheduleForm, setScheduleForm] = useState({ employee_id: '', date: '', shift_id: '' });
   const [swapForm, setSwapForm] = useState({ requester_employee_id: '', target_employee_id: '', date: '' });
   const [swaps, setSwaps] = useState([]);
   const [swapFilters, setSwapFilters] = useState({ status: '', start: '', end: '', employee_id: '' });
@@ -31,8 +25,8 @@ const Roster = () => {
   useEffect(() => {
     (async () => {
       const emps = await listEmployees();
-      const sh = await listShifts();
       setEmployees(emps.data.data ? emps.data.data : emps.data);
+      const sh = await listShifts();
       setShifts(sh.data);
       await loadSwaps();
       const saved = JSON.parse(localStorage.getItem('swapFilterPresets') || '[]');
@@ -46,10 +40,6 @@ const Roster = () => {
       return () => clearTimeout(t);
     }
   }, [message]);
-
-  const toggleEmployee = (id) => {
-    setSelectedEmployees(prev => prev.includes(id) ? prev.filter(e => e !== id) : [...prev, id]);
-  };
 
   const resetFilters = async () => {
     setSwapFilters({ status: '', start: '', end: '', employee_id: '' });
@@ -84,24 +74,6 @@ const Roster = () => {
     setMessage(`Preset "${name}" dihapus.`);
   };
 
-  const onGenerate = async (e) => {
-    e.preventDefault();
-    setMessage('');
-    try {
-      const pattern = patternIds.split(',').map(v => parseInt(v.trim(), 10)).filter(Boolean);
-      await generateRoster({ employee_ids: selectedEmployees, start_date: startDate, days: Number(days), pattern, rotation });
-      setMessage('Roster berhasil digenerate.');
-    } catch (err) {
-      setMessage(err.response?.data?.message || 'Gagal generate roster');
-    }
-  };
-
-  const onLoadSchedules = async (e) => {
-    e.preventDefault();
-    const res = await listSchedules({ start: range.start, end: range.end });
-    setSchedules(res.data);
-  };
-
   const onRequestSwap = async (e) => {
     e.preventDefault();
     setMessage('');
@@ -111,6 +83,17 @@ const Roster = () => {
       await loadSwaps();
     } catch (err) {
       setMessage(err.response?.data?.message || 'Gagal mengirim permintaan tukar shift');
+    }
+  };
+
+  const onSetSchedule = async (e) => {
+    e.preventDefault();
+    setMessage('');
+    try {
+      await setSchedule(scheduleForm);
+      setMessage('Jadwal harian disimpan.');
+    } catch (err) {
+      setMessage(err.response?.data?.message || 'Gagal menyimpan jadwal');
     }
   };
 
@@ -138,85 +121,44 @@ const Roster = () => {
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-8">
-      <h1 className="text-2xl font-semibold mb-4">Roster Scheduling</h1>
+      <h1 className="text-2xl font-semibold mb-4">Roster</h1>
       {message && <div className="mb-4 text-sm">{message}</div>}
 
-      <form onSubmit={onGenerate} className="bg-white shadow rounded p-4 mb-8">
-        <h2 className="font-semibold mb-3">Generate Roster</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <form onSubmit={onSetSchedule} className="bg-white shadow rounded p-4 mb-8">
+        <h2 className="font-semibold mb-3">Atur Jadwal Harian</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
-            <label className="block text-sm mb-1">Pilih Karyawan</label>
-            <div className="border rounded p-2 max-h-48 overflow-y-auto">
-              {employees.map(e => (
-                <label key={e.id} className="block">
-                  <input type="checkbox" checked={selectedEmployees.includes(e.id)} onChange={() => toggleEmployee(e.id)} /> {e.name || e.id}
-                </label>
-              ))}
-            </div>
+            <label className="block text-sm mb-1">Karyawan</label>
+            <select value={scheduleForm.employee_id} onChange={e => setScheduleForm({ ...scheduleForm, employee_id: e.target.value })} className="w-full border rounded p-2">
+              <option value="">-- Pilih --</option>
+              {employees.map(e => <option key={e.id} value={e.id}>{e.name || e.id}</option>)}
+            </select>
           </div>
           <div>
-            <label className="block text-sm mb-1">Tanggal Mulai</label>
-            <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} className="w-full border rounded p-2" />
+            <label className="block text-sm mb-1">Tanggal</label>
+            <input type="date" value={scheduleForm.date} onChange={e => setScheduleForm({ ...scheduleForm, date: e.target.value })} className="w-full border rounded p-2" />
           </div>
           <div>
-            <label className="block text-sm mb-1">Jumlah Hari</label>
-            <input type="number" value={days} onChange={e => setDays(e.target.value)} className="w-full border rounded p-2" min="1" max="180" />
-          </div>
-          <div>
-            <label className="block text-sm mb-1">Pola Shift (ID dipisah koma)</label>
-            <input type="text" value={patternIds} onChange={e => setPatternIds(e.target.value)} className="w-full border rounded p-2" placeholder={shifts.map(s => s.id).join(',')} />
-          </div>
-          <div>
-            <label className="block text-sm mb-1">Rotasi</label>
-            <select value={rotation} onChange={e => setRotation(e.target.value)} className="w-full border rounded p-2">
-              <option value="daily">Harian</option>
-              <option value="weekly">Mingguan</option>
+            <label className="block text-sm mb-1">Shift</label>
+            <select value={scheduleForm.shift_id} onChange={e => setScheduleForm({ ...scheduleForm, shift_id: e.target.value })} className="w-full border rounded p-2">
+              <option value="">-- Pilih --</option>
+              {shifts
+                .filter(s => {
+                  const name = (s.name || '').toLowerCase();
+                  const code = (s.code || '').toLowerCase();
+                  return name.includes('pagi') || name.includes('malam') || code.includes('pagi') || code.includes('malam');
+                })
+                .map(s => (
+                  <option key={s.id} value={s.id}>{s.name || s.code || s.id}</option>
+                ))}
             </select>
           </div>
         </div>
         <div className="mt-4">
-          <button className="bg-blue-900 text-white px-4 py-2 rounded">Generate</button>
+          <button className="bg-gray-800 text-white px-4 py-2 rounded">Simpan Jadwal</button>
         </div>
       </form>
 
-      <form onSubmit={onLoadSchedules} className="bg-white shadow rounded p-4 mb-8">
-        <h2 className="font-semibold mb-3">Lihat Jadwal</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div>
-            <label className="block text-sm mb-1">Mulai</label>
-            <input type="date" value={range.start} onChange={e => setRange({ ...range, start: e.target.value })} className="w-full border rounded p-2" />
-          </div>
-          <div>
-            <label className="block text-sm mb-1">Selesai</label>
-            <input type="date" value={range.end} onChange={e => setRange({ ...range, end: e.target.value })} className="w-full border rounded p-2" />
-          </div>
-          <div className="flex items-end">
-            <button className="bg-gray-800 text-white px-4 py-2 rounded">Load</button>
-          </div>
-        </div>
-        <div className="mt-4">
-          <table className="w-full text-sm">
-            <thead>
-              <tr>
-                <th className="text-left p-2">Tanggal</th>
-                <th className="text-left p-2">Karyawan</th>
-                <th className="text-left p-2">Shift</th>
-                <th className="text-left p-2">Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {schedules.map(s => (
-                <tr key={`${s.employee_id}-${s.date}`}>
-                  <td className="p-2">{s.date}</td>
-                  <td className="p-2">{s.employee?.name || s.employee_id}</td>
-                  <td className="p-2">{s.shift?.name}</td>
-                  <td className="p-2">{s.status}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </form>
 
       <form onSubmit={onRequestSwap} className="bg-white shadow rounded p-4 mb-8">
         <h2 className="font-semibold mb-3">Penggantian Shift</h2>

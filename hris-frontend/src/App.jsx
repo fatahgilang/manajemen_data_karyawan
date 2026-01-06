@@ -15,6 +15,7 @@ import AttendanceLogin from './components/AttendanceLogin';
 import Documents from './components/Documents';
 import Shifts from './components/Shifts';
 import Roster from './components/Roster';
+import HRDocuments from './components/HRDocuments';
 
 const RequireAuth = ({ children }) => {
   const location = useLocation();
@@ -76,6 +77,7 @@ const ScrollAwareLayout = () => {
           <Route path="/documents" element={<RequireAuth><Documents /></RequireAuth>} />
           <Route path="/shifts" element={<RequireAuth><Shifts /></RequireAuth>} />
           <Route path="/roster" element={<RequireAuth><Roster /></RequireAuth>} />
+          <Route path="/hr-documents" element={<RequireAuth><HRDocuments /></RequireAuth>} />
         </Routes>
       </main>
       <Footer />

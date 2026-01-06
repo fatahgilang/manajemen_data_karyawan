@@ -37,10 +37,15 @@ export const updateShift = (id, payload) => api.put(`/shifts/${id}`, payload);
 export const deleteShift = (id) => api.delete(`/shifts/${id}`);
 
 export const listSchedules = (params) => api.get('/roster/schedules', { params });
+export const setSchedule = (payload) => api.post('/roster/schedule', payload);
 export const generateRoster = (payload) => api.post('/roster/generate', payload);
 export const requestShiftSwap = (payload) => api.post('/roster/swap', payload);
 export const listShiftSwaps = (params) => api.get('/roster/swaps', { params });
 export const approveShiftSwap = (id) => api.post(`/roster/swap/${id}/approve`);
 export const rejectShiftSwap = (id) => api.post(`/roster/swap/${id}/reject`);
+
+// ===== HR Documents (Contracts & Warnings) =====
+export const generateContractLetter = (payload) => api.post('/hr-documents/contracts', payload, { responseType: 'blob' });
+export const generateWarningLetter = (payload) => api.post('/hr-documents/warnings', payload, { responseType: 'blob' });
 
 export default api;
